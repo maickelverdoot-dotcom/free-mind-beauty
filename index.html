@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Mind Beauty | Natuurlijke Schoonheid</title>
+    
+    <!-- Google Fonts - Elegant & Speels -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome voor iconen -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ===== CSS VARIABELEN - ZEER LICHTE PASTEL KLEUREN ===== */
+        :root {
+            --primary-sage: #bcc9bf;      /* Zeer licht saliegroen */
+            --light-sage: #e0e8de;        /* Extra licht groen */
+            --dark-sage: #8f9d8f;         /* Nog steeds zacht */
+            --warm-blush: #f0dcd3;        /* Zeer zacht blush */
+            --light-blush: #fae8df;       /* Extra licht blush */
+            --pastel-pink: #fce6dd;       /* Zeer licht roze */
+            --pastel-peach: #fae5d9;      /* Zeer licht perzik */
+            --cream: #fdfcfb;             /* Super warme crème */
+            --white: #ffffff;             /* Wit */
+            --text-dark: #5a6559;         /* Zacht groen-grijs */
+            --text-light: #8b9b8a;        /* Medium zacht groen */
+            --accent-light: #f5f0ea;      /* Heel licht taupe */
+            --whatsapp: #25D366;          /* WhatsApp groen */
+            --shadow-light: rgba(188, 201, 191, 0.08);
+            --shadow-medium: rgba(240, 220, 211, 0.12);
+        }
+
+        /* ===== RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ===== BODY ===== */
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--cream) 0%, #fefaf6 50%, var(--light-blush) 100%);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVIGATIE ===== */
+        .navbar {
+            background: var(--white);
+            padding: 1.2rem 2rem;
+            box-shadow: 0 4px 20px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.6s ease-out;
+            border-bottom: 3px solid var(--light-blush);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--warm-blush) 50%, var(--pastel-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+            letter-spacing: 0.5px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -8px;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary-sage), var(--warm-blush), var(--pastel-pink));
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-sage);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--dark-sage) 100%);
+            color: white !important;
+            padding: 0.9rem 2rem;
+            border-radius: 35px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 20px rgba(188, 201, 191, 0.3);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(188, 201, 191, 0.4);
+        }
+
+        /* ===== HERO SECTIE MET ANIMATIEACHTERGROND ===== */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            overflow: visible;
+            min-height: 700px;
+        }
+
+        /* Bewegende achtergrond bloemdecoraties */
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--light-sage) 0%, var(--pastel-pink) 50%, transparent 100%);
+            border-radius: 50%;
+            top: -300px;
+            right: -200px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--pastel-peach) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -100px;
+            z-index: -1;
+            opacity: 0.2;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        /* Decoratieve bewegende bloemen */
+        .floating-flowers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .flower {
+            position: absolute;
+            opacity: 0.4;
+            animation: floatBlossom 6s ease-in-out infinite;
+        }
+
+        .flower-1 {
+            top: 10%;
+            left: 5%;
+            animation: floatBlossom 7s ease-in-out infinite;
+        }
+
+        .flower-2 {
+            top: 20%;
+            right: 8%;
+            animation: floatBlossom 8s ease-in-out infinite;
+        }
+
+        .flower-3 {
+            bottom: 15%;
+            left: 10%;
+            animation: floatBlossom 9s ease-in-out infinite;
+        }
+
+        .flower-4 {
+            bottom: 20%;
+            right: 5%;
+            animation: floatBlossom 6.5s ease-in-out infinite;
+        }
+
+        .flower-5 {
+            top: 35%;
+            left: 3%;
+            animation: floatBlossom 8.5s ease-in-out infinite;
+        }
+
+        .flower-6 {
+            bottom: 30%;
+            right: 12%;
+            animation: floatBlossom 7.5s ease-in-out infinite;
+        }
+
+        @keyframes floatBlossom {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+                opacity: 0.4;
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px) rotate(90deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-40px) translateX(-10px) rotate(180deg);
+                opacity: 0.5;
+            }
+            75% {
+                transform: translateY(-20px) translateX(15px) rotate(270deg);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(30px) translateX(20px); }
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: slideInLeft 0.8s ease-out;
+            position: relative;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary-sage) 50%, var(--warm-blush) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            font-style: italic;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1.05rem 2.4rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--dark-sage) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(188, 201, 191, 0.4);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, var(--whatsapp) 0%, #1da851 100%);
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Hero Illustration */
+        .hero-illustration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideInRight 0.8s ease-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-illustration svg {
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            filter: drop-shadow(0 20px 40px var(--shadow-light));
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        /* ===== OVER MIJ SECTIE ===== */
+        .about {
+            background: linear-gradient(135deg, var(--light-blush) 0%, var(--pastel-peach) 100%);
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--light-sage) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -150px;
+            left: -100px;
+            z-index: 0;
+            opacity: 0.15;
+        }
+
+        .about .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .about-content {
+            background: var(--white);
+            padding: 3.5rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 35px var(--shadow-light);
+            border: 2px solid var(--light-blush);
+        }
+
+        .about h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            color: var(--primary-sage);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        /* ===== SERVICES SECTIE - OVERZICHTELIJKER ===== */
+        .services {
+            background: linear-gradient(135deg, var(--white) 0%, var(--accent-light) 50%, var(--light-sage) 100%);
+            padding: 6rem 2rem;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--warm-blush) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            right: -150px;
+            z-index: 0;
+            opacity: 0.2;
+            animation: float 12s ease-in-out infinite;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            text-align: center;
+            margin-bottom: 3.5rem;
+            background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary-sage) 50%, var(--warm-blush) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-sage), var(--warm-blush), var(--pastel-pink));
+            margin: 1.2rem auto 0;
+            border-radius: 3px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 35px var(--shadow-light);
+            transition: all 0.4s ease;
+            border-top: 5px solid var(--primary-sage);
+            border-right: 2px solid var(--pastel-pink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--light-sage) 0%, var(--pastel-peach) 50%, transparent 100%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 18px 45px var(--shadow-medium);
+        }
+
+        .service-card:hover::before {
+            opacity: 0.6;
+        }
+
+        .service-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--primary-sage);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            border-bottom: 2px solid var(--accent-light);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .service-name {
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover .service-name {
+            color: var(--primary-sage);
+        }
+
+        .service-price {
+            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--dark-sage) 100%);
+            color: white;
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== GALLERY SECTIE ===== */
+        .gallery {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--light-blush) 100%);
+            position: relative;
+        }
+
+        .gallery::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--light-sage) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 50px;
+            right: 50px;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .gallery .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .gallery-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-tab {
+            padding: 0.8rem 1.8rem;
+            border: 2px solid var(--primary-sage);
+            background: white;
+            color: var(--primary-sage);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .gallery-tab:hover {
+            background: var(--primary-sage);
+            color: white;
+        }
+
+        .gallery-tab.active {
+            background: var(--primary-sage);
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 35px var(--shadow-light);
+            transition: all 0.4s ease;
+            height: 320px;
+            cursor: pointer;
+            border: 3px solid var(--light-blush);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 18px 45px var(--shadow-medium);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.12);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(188, 201, 191, 0.75), rgba(240, 220, 211, 0.75));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item.hidden {
+            display: none;
+        }
+
+        /* ===== INFO SECTIE ===== */
+        .info {
+            background: linear-gradient(135deg, var(--pastel-peach) 0%, var(--pastel-pink) 100%);
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--light-sage) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -150px;
+            right: -100px;
+            z-index: 0;
+            opacity: 0.15;
+        }
+
+        .info .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px var(--shadow-light);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary-sage);
+            text-align: center;
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px var(--shadow-medium);
+        }
+
+        .info-card i {
+            font-size: 3rem;
+            color: var(--primary-sage);
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--primary-sage);
+            margin-bottom: 1rem;
+        }
+
+        .info-card p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .info-card a {
+            color: var(--primary-sage);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .info-card a:hover {
+            color: var(--dark-sage);
+        }
+
+        /* ===== CONTACT SECTIE ===== */
+        .contact {
+            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--dark-sage) 50%, var(--warm-blush) 100%);
+            padding: 7rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 12s ease-in-out infinite;
+        }
+
+        .contact::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(252, 230, 221, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        .contact-box {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 4rem;
+            border-radius: 30px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+            max-width: 650px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            border: 2px solid var(--light-blush);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary-sage) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .contact p {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            letter-spacing: 0.3px;
+        }
+
+        .contact-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-call {
+            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--dark-sage) 100%);
+            color: white;
+        }
+
+        .btn-call:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(188, 201, 191, 0.4);
+        }
+
+        .btn-whatsapp-large {
+            background: linear-gradient(135deg, var(--whatsapp) 0%, #1da851 100%);
+            color: white;
+        }
+
+        .btn-whatsapp-large:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* ===== ADMIN PANEL STYLES ===== */
+        .admin-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--dark-sage) 100%);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(188, 201, 191, 0.4);
+            color: white;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .admin-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 10px 30px rgba(188, 201, 191, 0.6);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 3rem;
+            border-radius: 25px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .modal h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--primary-sage);
+            margin-bottom: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--light-sage);
+            border-radius: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-sage);
+        }
+
+        .form-group input[type="file"] {
+            padding: 0.5rem;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--dark-sage) 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(188, 201, 191, 0.4);
+        }
+
+        .btn-cancel {
+            background: var(--accent-light);
+            color: var(--text-dark);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            background: var(--light-sage);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary-sage) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 2rem;
+            font-size: 1rem;
+            border-top: 4px solid var(--light-blush);
+        }
+
+        footer p {
+            margin: 0;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 3rem 1.5rem;
+            }
+
+            .hero-illustration {
+                order: -1;
+                margin-bottom: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.95rem;
+            }
+
+            .logo {
+                font-size: 26px;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 2rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.8rem;
+            }
+
+            .about-content {
+                padding: 2rem;
+            }
+
+            .contact-box {
+                padding: 2.5rem;
+            }
+
+            .contact h2 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 0.95rem 2rem;
+                font-size: 0.95rem;
+            }
+
+            .gallery-tabs {
+                gap: 0.5rem;
+            }
+
+            .gallery-tab {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .admin-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 22px;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 1rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .contact-box {
+                padding: 2rem;
+            }
+
+            .contact h2 {
+                font-size: 1.6rem;
+            }
+
+            .contact-actions {
+                flex-direction: column;
+            }
+
+            .contact-actions .btn {
+                width: 100%;
+            }
+
+            .gallery-item {
+                height: 280px;
+            }
+
+            .about-content {
+                padding: 1.5rem;
+            }
+
+            .flower {
+                display: none;
+            }
+
+            .gallery-tabs {
+                gap: 0.3rem;
+            }
+
+            .gallery-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .modal-content {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigatiebalk -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">✨ Free Mind Beauty</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Over Mij</a></li>
+                <li><a href="#diensten">Behandelingen</a></li>
+                <li><a href="#galerij">Galerij</a></li>
+                <li><a href="#info">Contact Info</a></li>
+                <li><a href="#contact" class="nav-btn">Afspraak maken</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Sectie -->
+    <header id="home" class="hero">
+        <!-- Floating Flowers Decoration -->
+        <div class="floating-flowers">
+            <svg class="flower flower-1" viewBox="0 0 50 50" width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="rose1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f0dcd3;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#e0b0b0;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle cx="25" cy="25" r="8" fill="url(#rose1)"/>
+                <ellipse cx="25" cy="12" rx="6" ry="10" fill="url(#rose1)" opacity="0.8"/>
+                <ellipse cx="38" cy="25" rx="10" ry="6" fill="url(#rose1)" opacity="0.8"/>
+                <ellipse cx="25" cy="38" rx="6" ry="10" fill="url(#rose1)" opacity="0.8"/>
+                <ellipse cx="12" cy="25" rx="10" ry="6" fill="url(#rose1)" opacity="0.8"/>
+            </svg>
+
+            <svg class="flower flower-2" viewBox="0 0 50 50" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="rose2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#fce6dd;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#f0dcd3;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle cx="25" cy="25" r="10" fill="url(#rose2)"/>
+                <ellipse cx="25" cy="10" rx="7" ry="12" fill="url(#rose2)" opacity="0.85"/>
+                <ellipse cx="40" cy="25" rx="12" ry="7" fill="url(#rose2)" opacity="0.85"/>
+                <ellipse cx="25" cy="40" rx="7" ry="12" fill="url(#rose2)" opacity="0.85"/>
+                <ellipse cx="10" cy="25" rx="12" ry="7" fill="url(#rose2)" opacity="0.85"/>
+            </svg>
+
+            <svg class="flower flower-3" viewBox="0 0 50 50" width="55" height="55" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="rose3" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#fae5d9;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#e8c9c1;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle cx="25" cy="25" r="9" fill="url(#rose3)"/>
+                <ellipse cx="25" cy="11" rx="6" ry="11" fill="url(#rose3)" opacity="0.82"/>
+                <ellipse cx="39" cy="25" rx="11" ry="6" fill="url(#rose3)" opacity="0.82"/>
+                <ellipse cx="25" cy="39" rx="6" ry="11" fill="url(#rose3)" opacity="0.82"/>
+                <ellipse cx="11" cy="25" rx="11" ry="6" fill="url(#rose3)" opacity="0.82"/>
+            </svg>
+
+            <svg class="flower flower-4" viewBox="0 0 50 50" width="45" height="45" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="rose4" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#bcc9bf;stop-opacity:0.8" />
+                        <stop offset="100%" style="stop-color:#d4e0ce;stop-opacity:0.8" />
+                    </linearGradient>
+                </defs>
+                <circle cx="25" cy="25" r="8" fill="url(#rose4)"/>
+                <ellipse cx="25" cy="12" rx="5" ry="9" fill="url(#rose4)" opacity="0.7"/>
+                <ellipse cx="38" cy="25" rx="9" ry="5" fill="url(#rose4)" opacity="0.7"/>
+                <ellipse cx="25" cy="38" rx="5" ry="9" fill="url(#rose4)" opacity="0.7"/>
+                <ellipse cx="12" cy="25" rx="9" ry="5" fill="url(#rose4)" opacity="0.7"/>
+            </svg>
+
+            <svg class="flower flower-5" viewBox="0 0 50 50" width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="rose5" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f0dcd3;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#e0b0b0;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle cx="25" cy="25" r="8" fill="url(#rose5)"/>
+                <ellipse cx="25" cy="12" rx="6" ry="10" fill="url(#rose5)" opacity="0.8"/>
+                <ellipse cx="38" cy="25" rx="10" ry="6" fill="url(#rose5)" opacity="0.8"/>
+                <ellipse cx="25" cy="38" rx="6" ry="10" fill="url(#rose5)" opacity="0.8"/>
+                <ellipse cx="12" cy="25" rx="10" ry="6" fill="url(#rose5)" opacity="0.8"/>
+            </svg>
+
+            <svg class="flower flower-6" viewBox="0 0 50 50" width="65" height="65" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="rose6" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#fce6dd;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#f0dcd3;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle cx="25" cy="25" r="11" fill="url(#rose6)"/>
+                <ellipse cx="25" cy="9" rx="8" ry="13" fill="url(#rose6)" opacity="0.88"/>
+                <ellipse cx="41" cy="25" rx="13" ry="8" fill="url(#rose6)" opacity="0.88"/>
+                <ellipse cx="25" cy="41" rx="8" ry="13" fill="url(#rose6)" opacity="0.88"/>
+                <ellipse cx="9" cy="25" rx="13" ry="8" fill="url(#rose6)" opacity="0.88"/>
+            </svg>
+        </div>
+
+        <div class="hero-content">
+            <h1>Ontspan je geest,<br>omarm je schoonheid.</h1>
+            <p>✨ Luxe verzorging ook op verplaatsing ✨</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="far fa-calendar"></i> Boek nu
+                </a>
+                <a href="https://wa.me/32456872335" target="_blank" class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+
+        <!-- SVG Illustratie - Bloem -->
+        <div class="hero-illustration">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Bloem in speelse pastels -->
+                <defs>
+                    <linearGradient id="petalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#bcc9bf;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#f0dcd3;stop-opacity:0.9" />
+                    </linearGradient>
+                    <linearGradient id="centerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f0dcd3;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#fae5d9;stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <!-- Bloemblaadjes - 5 stuks speels -->
+                <g id="flower" filter="url(#glow)">
+                    <ellipse cx="100" cy="35" rx="22" ry="40" fill="url(#petalGradient)" opacity="1" transform="rotate(0 100 100)"/>
+                    <ellipse cx="100" cy="35" rx="22" ry="40" fill="url(#petalGradient)" opacity="0.95" transform="rotate(72 100 100)"/>
+                    <ellipse cx="100" cy="35" rx="22" ry="40" fill="url(#petalGradient)" opacity="0.9" transform="rotate(144 100 100)"/>
+                    <ellipse cx="100" cy="35" rx="22" ry="40" fill="url(#petalGradient)" opacity="0.95" transform="rotate(216 100 100)"/>
+                    <ellipse cx="100" cy="35" rx="22" ry="40" fill="url(#petalGradient)" opacity="1" transform="rotate(288 100 100)"/>
+                    
+                    <!-- Bloemcentrum -->
+                    <circle cx="100" cy="100" r="28" fill="url(#centerGradient)" />
+                    <circle cx="100" cy="100" r="18" fill="#fce6dd" opacity="0.7"/>
+                    <circle cx="100" cy="100" r="8" fill="#e0e8de" opacity="0.5"/>
+                </g>
+
+                <!-- Decoratieve blaadjes -->
+                <path d="M 70 120 Q 55 140 65 165 Q 75 155 70 130" stroke="#bcc9bf" stroke-width="2.5" fill="#e0e8de" opacity="0.7" stroke-linecap="round"/>
+                <path d="M 130 120 Q 145 140 135 165 Q 125 155 130 130" stroke="#f0dcd3" stroke-width="2.5" fill="#fae5d9" opacity="0.6" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </header>
+
+    <!-- Over Mij Sectie -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <h2>Over Mij ✨</h2>
+                <p>
+                    Welkom bij Free Mind Beauty! Ik ben Femke schoonheidsspecialiste die gelooft dat iedereen het recht heeft 
+                    op luxe verzorging die ook nog eens op verplaatsing kan als dat nodig is. Mijn missie is om jou een moment van pure ontspanning en verwennerij te bieden.
+                
+                </p>
+                <p>
+                    Mijn specialiteit? Natuurlijke, rustgevende behandelingen die niet alleen je huid, maar ook je ziel goed doen. 
+                    Ik werk met de best mogelijke producten en kom graag naar jou toe indien gewenst - want het gaat erom dat JIJ je ontspannen voelt.
+                </p>
+                <p>
+                    Laten we samen het beste uit jezelf halen! 💕
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Behandelingen Sectie - OVERZICHTELIJKER -->
+    <section id="diensten" class="services">
+        <div class="container">
+            <h2 class="section-title">Onze Behandelingen</h2>
+            <div class="services-grid">
+                
+                <!-- Gezichtsverzorging -->
+                <div class="service-card">
+                    <h3>👄 Gezichtsverzorging</h3>
+                    <div class="service-item">
+                        <span class="service-name">Basis Gezichtsverzorging</span>
+                        <span class="service-price">€35</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Luxe Gezichtsverzorging</span>
+                        <span class="service-price">€65</span>
+                    </div>
+                </div>
+
+                <!-- Massages -->
+                <div class="service-card">
+                    <h3>💆 Massage & Lichaam</h3>
+                    <div class="service-item">
+                        <span class="service-name">Volledige Lichaamsbehandeling</span>
+                        <span class="service-price">€55</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Rug, Nek & Schouders</span>
+                        <span class="service-price">€20</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Massage Achterzijde</span>
+                        <span class="service-price">€25</span>
+                    </div>
+                </div>
+
+                <!-- Handen & Voeten -->
+                <div class="service-card">
+                    <h3>💅 Handen & Voeten</h3>
+                    <div class="service-item">
+                        <span class="service-name">Basis Manicure</span>
+                        <span class="service-price">€15</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Luxe Manicure (Gellak)</span>
+                        <span class="service-price">€30</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Basis Pedicure</span>
+                        <span class="service-price">€18</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Luxe Pedicure (Gellak)</span>
+                        <span class="service-price">€30</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Fotogalerij Sectie -->
+    <section id="galerij" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Sfeerimpressie ✨</h2>
+            
+            <!-- Gallery Tabs -->
+            <div class="gallery-tabs">
+                <button class="gallery-tab active" data-category="all">Alles</button>
+                <button class="gallery-tab" data-category="NAGELS">💅 Nagels</button>
+                <button class="gallery-tab" data-category="SCHOONHEID">👄 Schoonheid</button>
+                <button class="gallery-tab" data-category="PEDICURE">👣 Pedicure</button>
+                <button class="gallery-tab" data-category="BEHANDELING">💆 Behandeling</button>
+                <button class="gallery-tab" data-category="SKINCARE">✨ Skincare</button>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item" data-category="SCHOONHEID">
+                    <img src="https://images.unsplash.com/photo-1552852081-5fbc8c9405d8?w=400&h=400&fit=crop" alt="Salon sfeer - Massage behandeling">
+                    <div class="gallery-overlay">Relaxatie</div>
+                </div>
+                <div class="gallery-item" data-category="SCHOONHEID">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop" alt="Gezichtsverzorging - Beauty behandeling">
+                    <div class="gallery-overlay">Schoonheid</div>
+                </div>
+                <div class="gallery-item" data-category="NAGELS">
+                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&h=400&fit=crop" alt="Manicure - Nagelkunst">
+                    <div class="gallery-overlay">Nagels</div>
+                </div>
+                <div class="gallery-item" data-category="PEDICURE">
+                    <img src="https://images.unsplash.com/photo-1599308773387-d41f0e1e75d9?w=400&h=400&fit=crop" alt="Pedicure behandeling">
+                    <div class="gallery-overlay">Voeten</div>
+                </div>
+                <div class="gallery-item" data-category="SKINCARE">
+                    <img src="https://images.unsplash.com/photo-1535241749838-299277b6305f?w=400&h=400&fit=crop" alt="Skincare routine">
+                    <div class="gallery-overlay">Skincare</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info Sectie -->
+    <section id="info" class="info">
+        <div class="container">
+            <h2 class="section-title">Contactgegevens 📍</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Telefoonnummer</h3>
+                    <p>
+                        <a href="tel:+32456872335">+32 456 872 335</a>
+                    </p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Adres</h3>
+                    <p>
+                        Meershoven 86 <br>
+                        3740/Bilzen<br>
+                        België
+                    </p>
+                </div>
+                <div class="info-card">
+                    <i class="fab fa-whatsapp"></i>
+                    <h3>WhatsApp</h3>
+                    <p>
+                        <a href="https://wa.me/32456872335" target="_blank">Chat via WhatsApp</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Boeken Sectie -->
+    <section id="contact" class="contact">
+        <div class="contact-box">
+            <h2>✨ Direct Boeken? ✨</h2>
+            <p>Neem contact op en maak je afspraak vandaag nog! We kijken ernaar uit je te verwelkomen.</p>
+            <div class="contact-actions">
+                <a href="tel:+32456872335" class="btn btn-call">
+                    <i class="fas fa-phone"></i> Bel Nu
+                </a>
+                <a href="https://wa.me/32456872335" target="_blank" class="btn btn-whatsapp-large">
+                    <i class="fab fa-whatsapp"></i> Chat WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Panel Button -->
+    <button class="admin-btn" id="adminBtn" title="Admin Panel">
+        <i class="fas fa-lock"></i>
+    </button>
+
+    <!-- Admin Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('loginModal')">&times;</button>
+            <h2>Admin Login</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="password">Wachtwoord:</label>
+                    <input type="password" id="password" required placeholder="Voer wachtwoord in">
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeModal('loginModal')">Annuleren</button>
+                    <button type="submit" class="btn-submit">Inloggen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('adminModal')">&times;</button>
+            <h2>Foto Toevoegen</h2>
+            <form onsubmit="handleUpload(event)">
+                <div class="form-group">
+                    <label for="photoFile">Kies een foto:</label>
+                    <input type="file" id="photoFile" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Categorie:</label>
+                    <select id="category" required>
+                        <option value="">-- Selecteer categorie --</option>
+                        <option value="NAGELS">💅 Nagels</option>
+                        <option value="SCHOONHEID">👄 Schoonheid</option>
+                        <option value="PEDICURE">👣 Pedicure</option>
+                        <option value="BEHANDELING">💆 Behandeling</option>
+                        <option value="SKINCARE">✨ Skincare</option>
+                    </select>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeModal('adminModal')">Annuleren</button>
+                    <button type="submit" class="btn-submit">Upload Foto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Free Mind Beauty | Alle rechten voorbehouden | Gemaakt door: Maickel V</p>
+    </footer>
+
+    <script>
+        // Admin Panel JavaScript
+        const ADMIN_PASSWORD = "Femke0090";
+        let isLoggedIn = false;
+
+        // Admin Button Click
+        document.getElementById('adminBtn').addEventListener('click', function() {
+            if (isLoggedIn) {
+                openModal('adminModal');
+            } else {
+                openModal('loginModal');
+            }
+        });
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const password = document.getElementById('password').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                isLoggedIn = true;
+                alert('✅ Succesvol ingelogd!');
+                closeModal('loginModal');
+                openModal('adminModal');
+                document.getElementById('password').value = '';
+            } else {
+                alert('❌ Wachtwoord onjuist!');
+            }
+        }
+
+        function handleUpload(event) {
+            event.preventDefault();
+            const file = document.getElementById('photoFile').files[0];
+            const category = document.getElementById('category').value;
+
+            if (!file || !category) {
+                alert('❌ Selecteer alstublieft een foto en categorie');
+                return;
+            }
+
+            // Create a File object to upload
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageData = e.target.result;
+                const photoItem = {
+                    id: Date.now(),
+                    src: imageData,
+                    category: category,
+                    alt: `Foto - ${category}`,
+                    timestamp: new Date().toLocaleString('nl-NL')
+                };
+
+                // Save to localStorage
+                let photos = JSON.parse(localStorage.getItem('galleryPhotos')) || [];
+                photos.push(photoItem);
+                localStorage.setItem('galleryPhotos', JSON.stringify(photos));
+
+                // Add to gallery
+                addPhotoToGallery(photoItem);
+
+                alert('✅ Foto succesvol geüpload!');
+                document.getElementById('photoFile').value = '';
+                document.getElementById('category').value = '';
+                closeModal('adminModal');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function addPhotoToGallery(photoItem) {
+            const gallery = document.getElementById('galleryGrid');
+            const newItem = document.createElement('div');
+            newItem.className = 'gallery-item';
+            newItem.setAttribute('data-category', photoItem.category);
+            newItem.innerHTML = `
+                <img src="${photoItem.src}" alt="${photoItem.alt}">
+                <div class="gallery-overlay">${photoItem.category}</div>
+            `;
+            gallery.appendChild(newItem);
+
+            // Reapply filter if active
+            const activeTab = document.querySelector('.gallery-tab.active');
+            if (activeTab) {
+                filterGallery(activeTab.getAttribute('data-category'));
+            }
+        }
+
+        // Gallery Filter Tabs
+        document.querySelectorAll('.gallery-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                filterGallery(this.getAttribute('data-category'));
+            });
+        });
+
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        // Load photos from localStorage on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const photos = JSON.parse(localStorage.getItem('galleryPhotos')) || [];
+            photos.forEach(photo => {
+                const gallery = document.getElementById('galleryGrid');
+                const newItem = document.createElement('div');
+                newItem.className = 'gallery-item';
+                newItem.setAttribute('data-category', photo.category);
+                newItem.innerHTML = `
+                    <img src="${photo.src}" alt="${photo.alt}">
+                    <div class="gallery-overlay">${photo.category}</div>
+                `;
+                gallery.appendChild(newItem);
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const loginModal = document.getElementById('loginModal');
+            const adminModal = document.getElementById('adminModal');
+            
+            if (event.target === loginModal) {
+                closeModal('loginModal');
+            }
+            if (event.target === adminModal) {
+                closeModal('adminModal');
+            }
+        });
+    </script>
+
+</body>
+</html>
