@@ -1595,149 +1595,189 @@
     <footer>
         <p>&copy; 2026 Free Mind Beauty | Alle rechten voorbehouden | Gemaakt door: Maickel V</p>
     </footer>
+<!-- 1. Firebase SDK's inladen via CDN -->
+<script type="module">
+    import { initializeApp } from "https://gstatic.com";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://gstatic.com";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://gstatic.com";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://gstatic.com";
 
-    <script>
-        // Admin Panel JavaScript
-        const ADMIN_PASSWORD = "Femke0090";
-        let isLoggedIn = false;
+    // 🔴 VERVANG DIT MET JOUW EIGEN FIREBASE CONFIGURATIE (te vinden in je Firebase Projectinstellingen)
+    const firebaseConfig = {
+         apiKey: "AIzaSyBQG87pGB_P-_AT01Ltl-S922WbUV0aGyU",
+  authDomain: "free-mind-beauty.firebaseapp.com",
+  projectId: "free-mind-beauty",
+  storageBucket: "free-mind-beauty.firebasestorage.app",
+  messagingSenderId: "10687471548",
+  appId: "1:10687471548:web:8660669a7fba4a1cc595b9",
+  measurementId: "G-YTXW8M0LHF"
+    };
 
-        // Admin Button Click
-        document.getElementById('adminBtn').addEventListener('click', function() {
-            if (isLoggedIn) {
-                openModal('adminModal');
-            } else {
-                openModal('loginModal');
-            }
-        });
+    // Firebase Initialiseren
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
 
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
+    // Globale status
+    let currentUser = null;
+
+    // Luisteren of de admin is ingelogd
+    onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+        // Optioneel: verander hier de knoptekst naar 'Admin Panel' of 'Log in' op basis van de status
+    });
+
+    // Admin Knop Klik
+    document.getElementById('adminBtn').addEventListener('click', function() {
+        if (currentUser) {
+            openModal('adminModal');
+        } else {
+            openModal('loginModal');
+        }
+    });
+
+    function openModal(modalId) {
+        document.getElementById(modalId).classList.add('active');
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    }
+
+    // Veilig inloggen via Firebase Authentication
+    // PAS OP: Zorg dat je HTML formulier nu een E-mailveld heeft, of vervang 'admin@domein.com' hieronder met je vaste admin-e-mail.
+    window.handleLogin = async function(event) {
+        event.preventDefault();
+        const email = document.getElementById('adminEmail')?.value || "jouw-admin-email@mail.com"; // Voeg eventueel een emailveld toe aan je HTML
+        const password = document.getElementById('password').value;
+        
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            alert('✅ Succesvol ingelogd!');
+            closeModal('loginModal');
+            openModal('adminModal');
+            document.getElementById('password').value = '';
+        } catch (error) {
+            alert('❌ Inloggen mislukt: ' + error.message);
+        }
+    }
+    // Koppelen aan het HTML formulier (nodig omdat dit een module-script is)
+    document.getElementById('loginForm')?.addEventListener('submit', handleLogin);
+
+    // Foto uploaden naar Firebase Storage en Firestore
+    window.handleUpload = async function(event) {
+        event.preventDefault();
+        const file = document.getElementById('photoFile').files[0];
+        const category = document.getElementById('category').value;
+
+        if (!file || !category) {
+            alert('❌ Selecteer alstublieft een foto en categorie');
+            return;
         }
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
+        if (!currentUser) {
+            alert('❌ Je moet ingelogd zijn om te uploaden.');
+            return;
         }
 
-        function handleLogin(event) {
-            event.preventDefault();
-            const password = document.getElementById('password').value;
+        try {
+            // 1. Upload bestand naar Firebase Storage
+            const storageRef = ref(storage, `gallery/${Date.now()}_${file.name}`);
+            const snapshot = await uploadBytes(storageRef, file);
             
-            if (password === ADMIN_PASSWORD) {
-                isLoggedIn = true;
-                alert('✅ Succesvol ingelogd!');
-                closeModal('loginModal');
-                openModal('adminModal');
-                document.getElementById('password').value = '';
-            } else {
-                alert('❌ Wachtwoord onjuist!');
-            }
-        }
+            // 2. Krijg de publieke Cloud URL van de foto
+            const downloadURL = await getDownloadURL(snapshot.ref);
 
-        function handleUpload(event) {
-            event.preventDefault();
-            const file = document.getElementById('photoFile').files[0];
-            const category = document.getElementById('category').value;
-
-            if (!file || !category) {
-                alert('❌ Selecteer alstublieft een foto en categorie');
-                return;
-            }
-
-            // Create a File object to upload
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const imageData = e.target.result;
-                const photoItem = {
-                    id: Date.now(),
-                    src: imageData,
-                    category: category,
-                    alt: `Foto - ${category}`,
-                    timestamp: new Date().toLocaleString('nl-NL')
-                };
-
-                // Save to localStorage
-                let photos = JSON.parse(localStorage.getItem('galleryPhotos')) || [];
-                photos.push(photoItem);
-                localStorage.setItem('galleryPhotos', JSON.stringify(photos));
-
-                // Add to gallery
-                addPhotoToGallery(photoItem);
-
-                alert('✅ Foto succesvol geüpload!');
-                document.getElementById('photoFile').value = '';
-                document.getElementById('category').value = '';
-                closeModal('adminModal');
+            // 3. Bewaar de metadata in Cloud Firestore
+            const photoItem = {
+                src: downloadURL,
+                category: category,
+                alt: `Foto - ${category}`,
+                timestamp: new Date().toISOString() // Gestandaardiseerde tijd voor sorteren
             };
-            reader.readAsDataURL(file);
+
+            await addDoc(collection(db, "photos"), photoItem);
+
+            // 4. Toevoegen aan de live gallery op het scherm
+            addPhotoToGallery(photoItem);
+
+            alert('✅ Foto succesvol geüpload naar de Cloud!');
+            document.getElementById('photoFile').value = '';
+            document.getElementById('category').value = '';
+            closeModal('adminModal');
+
+        } catch (error) {
+            console.error(error);
+            alert('❌ Uploaden mislukt: ' + error.message);
         }
+    }
+    document.getElementById('uploadForm')?.addEventListener('submit', handleUpload);
 
-        function addPhotoToGallery(photoItem) {
-            const gallery = document.getElementById('galleryGrid');
-            const newItem = document.createElement('div');
-            newItem.className = 'gallery-item';
-            newItem.setAttribute('data-category', photoItem.category);
-            newItem.innerHTML = `
-                <img src="${photoItem.src}" alt="${photoItem.alt}">
-                <div class="gallery-overlay">${photoItem.category}</div>
-            `;
-            gallery.appendChild(newItem);
+    function addPhotoToGallery(photoItem) {
+        const gallery = document.getElementById('galleryGrid');
+        const newItem = document.createElement('div');
+        newItem.className = 'gallery-item';
+        newItem.setAttribute('data-category', photoItem.category);
+        newItem.innerHTML = `
+            <img src="${photoItem.src}" alt="${photoItem.alt}">
+            <div class="gallery-overlay">${photoItem.category}</div>
+        `;
+        gallery.appendChild(newItem);
 
-            // Reapply filter if active
-            const activeTab = document.querySelector('.gallery-tab.active');
-            if (activeTab) {
-                filterGallery(activeTab.getAttribute('data-category'));
+        // Filter opnieuw toepassen als er een filter actief is
+        const activeTab = document.querySelector('.gallery-tab.active');
+        if (activeTab) {
+            filterGallery(activeTab.getAttribute('data-category'));
+        }
+    }
+
+    // Gallery Filter functionaliteit
+    document.querySelectorAll('.gallery-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            filterGallery(this.getAttribute('data-category'));
+        });
+    });
+
+    function filterGallery(category) {
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach(item => {
+            if (category === 'all' || item.getAttribute('data-category') === category) {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
             }
-        }
-
-        // Gallery Filter Tabs
-        document.querySelectorAll('.gallery-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                filterGallery(this.getAttribute('data-category'));
-            });
         });
+    }
 
-        function filterGallery(category) {
-            const items = document.querySelectorAll('.gallery-item');
-            items.forEach(item => {
-                if (category === 'all' || item.getAttribute('data-category') === category) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-        }
-
-        // Load photos from localStorage on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            const photos = JSON.parse(localStorage.getItem('galleryPhotos')) || [];
-            photos.forEach(photo => {
-                const gallery = document.getElementById('galleryGrid');
-                const newItem = document.createElement('div');
-                newItem.className = 'gallery-item';
-                newItem.setAttribute('data-category', photo.category);
-                newItem.innerHTML = `
-                    <img src="${photo.src}" alt="${photo.alt}">
-                    <div class="gallery-overlay">${photo.category}</div>
-                `;
-                gallery.appendChild(newItem);
-            });
-        });
-
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            const loginModal = document.getElementById('loginModal');
-            const adminModal = document.getElementById('adminModal');
+    // Foto's ophalen uit de Firebase Cloud Firestore wanneer de pagina laadt
+    window.addEventListener('DOMContentLoaded', async function() {
+        try {
+            // Haal foto's op gesorteerd op datum (nieuwste eerst)
+            const q = query(collection(db, "photos"), orderBy("timestamp", "desc"));
+            const querySnapshot = await getDocs(q);
             
-            if (event.target === loginModal) {
-                closeModal('loginModal');
-            }
-            if (event.target === adminModal) {
-                closeModal('adminModal');
-            }
-        });
-    </script>
+            querySnapshot.forEach((doc) => {
+                const photo = doc.data();
+                addPhotoToGallery(photo);
+            });
+        } catch (error) {
+            console.error("Fout bij ophalen foto's:", error);
+        }
+    });
+
+    // Modals sluiten bij klik buiten het venster
+    window.addEventListener('click', function(event) {
+        const loginModal = document.getElementById('loginModal');
+        const adminModal = document.getElementById('adminModal');
+        
+        if (event.target === loginModal) closeModal('loginModal');
+        if (event.target === adminModal) closeModal('adminModal');
+    });
+</script>
+
 
 </body>
 </html>
