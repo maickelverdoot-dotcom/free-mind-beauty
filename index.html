@@ -1586,7 +1586,62 @@
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 Free Mind Beauty | Alle rechten voorbehouden | Gemaakt door: Maickel V</p>
-    </footer>
+    </footer>   
+    
+    
+    <!-- 1. DE KNOP (Houd deze volledig LOS van de modals hieronder!) -->
+<button id="adminBtn" class="admin-toggle-btn">🔐 Admin Panel</button>
+
+<!-- 2. LOGIN MODAL -->
+<div id="loginModal" class="modal-overlay">
+    <div class="modal-content">
+        <h2>Admin Inloggen</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="adminEmail">E-mailadres:</label>
+                <input type="email" id="adminEmail" required placeholder="bijv. admin@mail.com">
+            </div>
+            <div class="form-group">
+                <label for="password">Wachtwoord:</label>
+                <input type="password" id="password" required placeholder="Wachtwoord">
+            </div>
+            <div class="modal-buttons">
+                <button type="submit" class="btn-submit">Inloggen</button>
+                <button type="button" class="btn-close" onclick="closeModal('loginModal')">Annuleren</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 3. UPLOAD MODAL -->
+<div id="adminModal" class="modal-overlay">
+    <div class="modal-content">
+        <h2>Foto Toevoegen (Cloud)</h2>
+        <form id="uploadForm">
+            <div class="form-group">
+                <label for="photoFile">Kies een foto:</label>
+                <input type="file" id="photoFile" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Categorie:</label>
+                <select id="category" required>
+                    <option value="">-- Selecteer categorie --</option>
+                    <option value="natuur">Natuur</option>
+                    <option value="portret">Portret</option>
+                    <option value="architectuur">Architectuur</option>
+                </select>
+            </div>
+            <div class="modal-buttons">
+                <button type="submit" class="btn-submit">Uploaden naar Website</button>
+                <button type="button" class="btn-close" onclick="closeModal('adminModal')">Sluiten</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+    
 
     
 <!-- 1. Firebase SDK's inladen via CDN -->
@@ -1771,55 +1826,6 @@
         if (event.target === adminModal) closeModal('adminModal');
     });
 </script>
-<!-- 1. De Admin Knop (Zet deze op een logische plek in je menu of footer) -->
-<button id="adminBtn" class="admin-toggle-btn">🔐 Admin Panel</button>
-
-<!-- 2. Het Inlogscherm (Login Modal) -->
-<div id="loginModal" class="modal-overlay">
-    <div class="modal-content">
-        <h2>Admin Inloggen</h2>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="adminEmail">E-mailadres:</label>
-                <input type="email" id="adminEmail" required placeholder="bijv. admin@mail.com">
-            </div>
-            <div class="form-group">
-                <label for="password">Wachtwoord:</label>
-                <input type="password" id="password" required placeholder="Wachtwoord">
-            </div>
-            <div class="modal-buttons">
-                <button type="submit" class="btn-submit">Inloggen</button>
-                <button type="button" class="btn-close" onclick="closeModal('loginModal')">Annuleren</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- 3. Het Uploadscherm (Admin Modal) -->
-<div id="adminModal" class="modal-overlay">
-    <div class="modal-content">
-        <h2>Foto Toevoegen (Cloud)</h2>
-        <form id="uploadForm">
-            <div class="form-group">
-                <label for="photoFile">Kies een foto:</label>
-                <input type="file" id="photoFile" accept="image/*" required>
-            </div>
-            <div class="form-group">
-                <label for="category">Categorie:</label>
-                <select id="category" required>
-                    <option value="">-- Selecteer categorie --</option>
-                    <option value="natuur">Natuur</option>
-                    <option value="portret">Portret</option>
-                    <option value="architectuur">Architectuur</option>
-                </select>
-            </div>
-            <div class="modal-buttons">
-                <button type="submit" class="btn-submit">Uploaden naar Website</button>
-                <button type="button" class="btn-close" onclick="closeModal('adminModal')">Sluiten</button>
-            </div>
-        </form>
-    </div>
-</div>
 
 
 </body>
