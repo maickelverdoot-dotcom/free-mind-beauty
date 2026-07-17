@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <!DOCTYPE html>
-<html lang="nl">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Mind Beauty | Natuurlijke Schoonheid</title>
@@ -54,7 +51,6 @@
             overflow-x: hidden;
         }
 
-
         /* ===== NAVIGATIE ===== */
         .navbar {
             background: var(--white);
@@ -95,6 +91,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: 1px;
+            text-decoration: none;
         }
 
         .nav-links {
@@ -152,6 +149,24 @@
             box-shadow: 0 8px 30px rgba(188, 201, 191, 0.4);
         }
 
+        /* ===== INSTRUCTIE BLOK (VOOR ADMINS) ===== */
+        .admin-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #664d03;
+            font-family: 'Courier New', monospace;
+        }
+
+        .admin-note strong {
+            color: #664d03;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
         /* ===== HERO SECTIE MET ANIMATIEACHTERGROND ===== */
         .hero {
             max-width: 1200px;
@@ -166,7 +181,6 @@
             min-height: 700px;
         }
 
-        /* Bewegende achtergrond bloemdecoraties */
         .hero::before {
             content: '';
             position: absolute;
@@ -195,7 +209,6 @@
             animation: float 10s ease-in-out infinite reverse;
         }
 
-        /* Decoratieve bewegende bloemen */
         .floating-flowers {
             position: absolute;
             width: 100%;
@@ -357,7 +370,6 @@
             box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
         }
 
-        /* Hero Illustration */
         .hero-illustration {
             display: flex;
             justify-content: center;
@@ -442,7 +454,7 @@
             font-family: 'Quicksand', sans-serif;
         }
 
-        /* ===== SERVICES SECTIE - OVERZICHTELIJKER ===== */
+        /* ===== SERVICES SECTIE ===== */
         .services {
             background: linear-gradient(135deg, var(--white) 0%, var(--accent-light) 50%, var(--light-sage) 100%);
             padding: 6rem 2rem;
@@ -582,7 +594,8 @@
             white-space: nowrap;
             letter-spacing: 0.5px;
         }
-/* ===== GALLERY SECTIE ===== */
+
+        /* ===== GALLERY SECTIE ===== */
         .gallery {
             padding: 6rem 2rem;
             background: linear-gradient(135deg, var(--cream) 0%, var(--light-blush) 100%);
@@ -605,7 +618,7 @@
 
         .gallery .container {
             width: 100%;
-            max-width: 1200px; /* Verbreed naar 1200px zodat je fotogrid mooi de ruimte krijgt */
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -620,7 +633,7 @@
         }
 
         .gallery-tab {
-            padding: 0.8rem 1.8rem;
+            padding: 0.9rem 2rem;
             border: 2px solid var(--primary-sage);
             background: white;
             color: var(--primary-sage);
@@ -629,11 +642,20 @@
             font-weight: 600;
             transition: all 0.3s ease;
             font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
         }
 
-        .gallery-tab:hover, .gallery-tab.active {
-            background: var(--primary-sage);
+        .gallery-tab:hover {
+            background: var(--light-sage);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(188, 201, 191, 0.3);
+        }
+
+        .gallery-tab.active {
+            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--dark-sage) 100%);
             color: white;
+            box-shadow: 0 8px 20px rgba(188, 201, 191, 0.4);
         }
 
         .gallery-grid {
@@ -672,11 +694,10 @@
             transform: scale(1.12);
         }
 
-        /* Donkere waas over de foto bij hover */
         .gallery-overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.15); /* Subtiele verdonkering van de foto */
+            background: rgba(0, 0, 0, 0.15);
             opacity: 0;
             transition: opacity 0.4s ease;
             display: flex;
@@ -685,11 +706,10 @@
             z-index: 2;
         }
 
-        /* De zachtroze badge met witte tekst IN de overlay */
         .gallery-overlay::before {
-            content: attr(data-label); /* Dit pakt automatisch de tekst van de categorie */
-            background-color: #fce6dd !important; /* Pastelroze */
-            color: #ffffff !important;            /* Witte tekst */
+            content: attr(data-label);
+            background-color: #fce6dd !important;
+            color: #5a6559 !important;
             font-weight: 600;
             padding: 10px 20px;
             border-radius: 20px;
@@ -705,7 +725,6 @@
             opacity: 1;
         }
 
-        /* Het roze kaartje veert elegant een stukje omhoog bij hover */
         .gallery-item:hover .gallery-overlay::before {
             transform: translateY(0);
         }
@@ -713,7 +732,6 @@
         .gallery-item.hidden {
             display: none !important;
         }
-
 
         /* ===== INFO SECTIE ===== */
         .info {
@@ -886,8 +904,6 @@
             box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
         }
 
-       
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -1025,8 +1041,69 @@
             letter-spacing: 0.5px;
         }
 
+        /* ===== ADMIN BUTTON - HOVER EFFECT ===== */
+        .admin-toggle-btn {
+            position: fixed;
+            top: 20px;         
+            left: 20px;        
+            background-color: #333;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 9999;     
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease, background-color 0.2s ease;
+            pointer-events: none;
+        }
+        
+        .admin-toggle-btn:hover {
+            opacity: 1;
+            background-color: #555;
+            pointer-events: auto;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-close {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            flex: 1;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-close:hover {
+            background: #da190b;
+        }
+
         /* ===== RESPONSIVE DESIGN ===== */
-          @media (max-width: 768px) {
+        @media (max-width: 768px) {
             .hero {
                 grid-template-columns: 1fr;
                 padding: 3rem 1.5rem;
@@ -1104,12 +1181,16 @@
                 font-size: 0.9rem;
             }
 
-            /* Gecorrigeerd naar de juiste class en linksboven positie */
             .admin-toggle-btn {
                 padding: 8px 14px;
                 font-size: 14px;
                 top: 15px;
                 left: 15px;
+            }
+
+            .admin-note {
+                font-size: 0.8rem;
+                padding: 0.8rem 1rem;
             }
         }
 
@@ -1190,76 +1271,25 @@
             .modal-content {
                 padding: 2rem;
             }
+
+            .admin-note {
+                font-size: 0.75rem;
+                padding: 0.6rem 0.8rem;
+            }
         }
-
-        /* Styling voor de pop-up vensters */
-        .modal-overlay {
-            display: none; /* Standaard onzichtbaar */
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            justify-content: center;
-            align-items: center;
-            z-index: 10000; /* Verhoogd naar 10000 zodat het altijd bovenop ligt */
-        }
-
-        /* Wordt geactiveerd via JavaScript (.classList.add('active')) */
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            color: #333;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .btn-submit { background: #4CAF50; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; flex: 1; font-weight: bold; }
-        .btn-close { background: #f44336; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; flex: 1; font-weight: bold; }
-        .admin-toggle-btn { padding: 10px 20px; background: #333; color: white; border: none; cursor: pointer; border-radius: 4px; }
-
     </style>
 </head>
 <body>
 
-
 <!-- Navigatiebalk -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">✨ Free Mind Beauty</a>
+            <a href="#home" class="logo">✨ Free Mind Beauty</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">Over Mij</a></li>
-                <li><a href="#diensten">Behandelingen</a></li>
-                <li><a href="#galerij">Galerij</a></li>
+                <li><a href="#services">Behandelingen</a></li>
+                <li><a href="#gallery">Galerij</a></li>
                 <li><a href="#info">Contact Info</a></li>
                 <li><a href="#contact" class="nav-btn">Afspraak maken</a></li>
             </ul>
@@ -1268,7 +1298,6 @@
 
     <!-- Hero Sectie -->
     <header id="home" class="hero">
-        <!-- Floating Flowers Decoration -->
         <div class="floating-flowers">
             <svg class="flower flower-1" viewBox="0 0 50 50" width="50" height="50" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -1362,14 +1391,14 @@
                 <a href="#contact" class="btn btn-primary">
                     <i class="far fa-calendar"></i> Boek nu
                 </a>
-                <a href="https://wa.me/32456872335" target="_blank" class="btn btn-whatsapp">
+                <a href="https://wa.me/32497076277?text=Hallo%20Femke!%20Ik%20wil%20graag%20een%20afspraak%20maken" target="_blank" class="btn btn-whatsapp">
                     <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
             </div>
         </div>
-              <!-- SVG Illustratie - Grote Bloem Volledig Hersteld -->
+
         <div class="hero-illustration">
-            <svg viewBox="0 0 200 200" xmlns="http://w3.org">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="petalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" style="stop-color:#bcc9bf;stop-opacity:1" />
@@ -1388,7 +1417,6 @@
                     </filter>
                 </defs>
 
-                <!-- Alle bloemblaadjes en het hart zijn hier correct gesloten -->
                 <g id="flower" filter="url(#glow)">
                     <ellipse cx="100" cy="55" rx="22" ry="35" fill="url(#petalGradient)" />
                     <ellipse cx="145" cy="100" rx="35" ry="22" fill="url(#petalGradient)" />
@@ -1398,18 +1426,189 @@
                 </g>
             </svg>
         </div>
-
-  
-        
-      
     </header>
 
-<!-- 1. DE ADMIN KNOP (Staat nu vast LINKSBOVEN op je scherm) -->
+    <!-- Over Mij Sectie -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="admin-note">
+                <strong>ℹ️ OVER MIJ SECTIE - BEWERK HIER:</strong>
+                Pas de tekst onder &lt;p&gt; tags aan. Dit is jouw persoonlijke introductie met info over jezelf (Femke), jouw specialisaties en wat bezoekers kunnen verwachten.
+            </div>
+            <div class="about-content">
+                <h2>Over Mij ✨</h2>
+                <p>
+                    Welkom bij Free Mind Beauty! Ik ben Femke schoonheidsspecialiste die gelooft dat iedereen het recht heeft 
+                    op luxe verzorging die ook nog eens op verplaatsing kan als dat nodig is. Mijn missie is om jou een moment van pure ontspanning en verwennerij te bieden.
+                </p>
+                <p>
+                    Mijn specialiteit? Natuurlijke, rustgevende behandelingen die niet alleen je huid, maar ook je ziel goed doen. 
+                    Ik werk met de best mogelijke producten en kom graag naar jou toe indien gewenst - want het gaat erom dat JIJ je ontspannen voelt.
+                </p>
+                <p>
+                    Laten we samen het beste uit jezelf halen! 💕
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Behandelingen Sectie -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="admin-note">
+                <strong>💰 SERVICES & PRIJZEN - BEWERK HIER:</strong>
+                Voor elke behandeling: verander de tekst in &lt;span class="service-name"&gt; en de EURO bedragen in &lt;span class="service-price"&gt;€XX&lt;/span&gt;. 
+                Voeg nieuwe diensten toe als &lt;div class="service-item"&gt;...&lt;/div&gt; blokken. Het systeem werkt automatisch!
+            </div>
+            <h2 class="section-title">Onze Behandelingen</h2>
+            <div class="services-grid">
+                
+                <!-- ===== GEZICHTSVERZORGING ===== 
+                     PRIJZEN HIER AANPASSEN:
+                     - Basis Gezichtsverzorging: €35
+                     - Luxe Gezichtsverzorging: €65
+                -->
+                <div class="service-card">
+                    <h3>👄 Gezichtsverzorging</h3>
+                    <div class="service-item">
+                        <span class="service-name">Basis Gezichtsverzorging</span>
+                        <span class="service-price">€35</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Luxe Gezichtsverzorging</span>
+                        <span class="service-price">€65</span>
+                    </div>
+                </div>
+
+                <!-- ===== MASSAGE & LICHAAM =====
+                     PRIJZEN HIER AANPASSEN:
+                     - Volledige Lichaamsbehandeling: €55
+                     - Rug, Nek & Schouders: €20
+                     - Massage Achterzijde: €25
+                -->
+                <div class="service-card">
+                    <h3>💆 Massage & Lichaam</h3>
+                    <div class="service-item">
+                        <span class="service-name">Volledige Lichaamsbehandeling</span>
+                        <span class="service-price">€55</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Rug, Nek & Schouders</span>
+                        <span class="service-price">€20</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Massage Achterzijde</span>
+                        <span class="service-price">€25</span>
+                    </div>
+                </div>
+
+                <!-- ===== HANDEN & VOETEN =====
+                     PRIJZEN HIER AANPASSEN:
+                     - Basis Manicure: €15
+                     - Luxe Manicure (Gellak): €30
+                     - Basis Pedicure: €18
+                     - Luxe Pedicure (Gellak): €30
+                -->
+                <div class="service-card">
+                    <h3>💅 Handen & Voeten</h3>
+                    <div class="service-item">
+                        <span class="service-name">Basis Manicure</span>
+                        <span class="service-price">€15</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Luxe Manicure (Gellak)</span>
+                        <span class="service-price">€30</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Basis Pedicure</span>
+                        <span class="service-price">€18</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Luxe Pedicure (Gellak)</span>
+                        <span class="service-price">€30</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Sectie -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="admin-note">
+                <strong>🖼️ GALERIJ - HOOP HIER JE FOTO'S:</strong>
+                Klik op "🔐 Admin Panel" in de hoek om in te loggen. Upload foto's via het formulier en selecteer de categorie (Nagels, Schoonheid, Pedicure, etc.). 
+                De knoppen hieronder filteren automatisch op categorie - geen aanpassingen nodig!
+            </div>
+            <h2 class="section-title">Galerij</h2>
+            
+            <div class="gallery-tabs">
+                <button class="gallery-tab active" data-category="all">✨ Alles</button>
+                <button class="gallery-tab" data-category="NAGELS">💅 Nagels</button>
+                <button class="gallery-tab" data-category="SCHOONHEID">👄 Schoonheid</button>
+                <button class="gallery-tab" data-category="PEDICURE">👣 Pedicure</button>
+                <button class="gallery-tab" data-category="BEHANDELING">💆 Behandeling</button>
+                <button class="gallery-tab" data-category="SKINCARE">✨ Skincare</button>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Foto's zullen hier geladen worden via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Sectie -->
+    <section id="info" class="info">
+        <div class="container">
+            <h2 class="section-title">Contact Informatie</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Bel Me</h3>
+                    <p><a href="tel:+32497076277">+32 497 076 277</a></p>
+                </div>
+                <div class="info-card">
+                    <i class="fab fa-whatsapp"></i>
+                    <h3>WhatsApp</h3>
+                    <p><a href="https://wa.me/32497076277" target="_blank">Chat via WhatsApp</a></p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Locatie</h3>
+                    <p>Meershoven 86 3740 Bilzen</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Sectie -->
+    <section id="contact" class="contact">
+        <div class="contact-box">
+            <h2>Afspraak Maken</h2>
+            <p>Stuur me een bericht en ik neem zo snel mogelijk contact met je op!</p>
+            <div class="contact-actions">
+                <a href="tel:+32497076277" class="btn btn-call">
+                    <i class="fas fa-phone"></i> Bel Mij
+                </a>
+                <a href="https://wa.me/32497076277?text=Hallo%20Femke!%20Ik%20wil%20graag%20een%20afspraak%20maken" target="_blank" class="btn btn-whatsapp-large">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Free Mind Beauty. Alle rechten voorbehouden. Gemaakt door Maickel V. ✨</p>
+    </footer>
+
+    <!-- Admin Button - HOVER ONLY VISIBLE -->
     <button id="adminBtn" class="admin-toggle-btn">🔐 Admin Panel</button>
 
-    <!-- 2. LOGIN MODAL -->
+    <!-- Login Modal -->
     <div id="loginModal" class="modal-overlay">
         <div class="modal-content">
+            <button class="modal-close" id="closeLoginBtn">&times;</button>
             <h2>Admin Inloggen</h2>
             <form id="loginForm">
                 <div class="form-group">
@@ -1422,21 +1621,21 @@
                 </div>
                 <div class="modal-buttons">
                     <button type="submit" class="btn-submit">Inloggen</button>
-                    <button type="button" class="btn-close" id="closeLoginBtn">Annuleren</button>
+                    <button type="button" class="btn-close" id="closeLoginBtn2">Annuleren</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- 3. UPLOAD MODAL -->
+    <!-- Upload Modal -->
     <div id="adminModal" class="modal-overlay">
         <div class="modal-content">
+            <button class="modal-close" id="closeAdminBtn">&times;</button>
             <h2>Foto Toevoegen (Cloud)</h2>
             <form id="uploadForm">
                 <div class="form-group">
                     <label for="photoFile">Kies een foto:</label>
-                    <!-- capture="environment" zorgt ervoor dat je op mobiel direct de camera kunt openen -->
-                    <input type="file" id="photoFile" accept="image/*" capture="environment" required>
+                    <input type="file" id="photoFile" accept="image/*" required>
                 </div>
                 <div class="form-group">
                     <label for="category">Categorie:</label>
@@ -1451,269 +1650,200 @@
                 </div>
                 <div class="modal-buttons">
                     <button type="submit" class="btn-submit">Uploaden naar Website</button>
-                    <button type="button" class="btn-close" id="closeAdminBtn">Sluiten</button>
+                    <button type="button" class="btn-close" id="closeAdminBtn2">Sluiten</button>
                 </div>
             </form>
         </div>
     </div>
-<!-- CSS Styling voor de Modals en de Knop linksboven -->
-<style>
-    .admin-toggle-btn {
-        position: fixed;
-        top: 20px;         
-        left: 20px;        
-        background-color: #333;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        z-index: 9999;     
-        font-weight: bold;
-        
-        /* 🚀 Knop is volledig onzichtbaar tot hover */
-        opacity: 0;
-        /* Zorgt voor een vloeiende overgang van 0.3 seconden */
-        transition: opacity 0.3s ease, background-color 0.2s ease;
-    }
-    
-    /* 🚀 Knop verschijnt direct zodra je met de muis linksboven gaat staan */
-    .admin-toggle-btn:hover {
-        opacity: 1;
-        background-color: #555;
-    }
 
-    .modal-overlay {
-        display: none;
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        justify-content: center;
-        align-items: center;
-        z-index: 10000;
-    }
-    .modal-overlay.active {
-        display: flex;
-    }
-    .modal-content {
-        background: white;
-        padding: 30px;
-        border-radius: 8px;
-        width: 90%;
-        max-width: 400px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        color: #333;
-    }
-    .form-group {
-        margin-bottom: 15px;
-    }
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-    .form-group input, .form-group select {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-    .modal-buttons {
-        display: flex;
-        gap: 10px;
-        margin-top: 20px;
-    }
-    .btn-submit { background: #4CAF50; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; flex: 1; font-weight: bold; }
-    .btn-close { background: #f44336; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; flex: 1; font-weight: bold; }
-</style>
+    <!-- Firebase Script - FULLY FIXED -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
+        const firebaseConfig = {
+            apiKey: "AIzaSyBQG87pGB_P-_AT01Ltl-S922WbUV0aGyU",
+            authDomain: "free-mind-beauty.firebaseapp.com",
+            projectId: "free-mind-beauty",
+            storageBucket: "free-mind-beauty.firebasestorage.app",
+            messagingSenderId: "10687471548",
+            appId: "1:10687471548:web:8660669a7fba4a1cc595b9",
+            measurementId: "G-YTXW8M0LHF"
+        };
 
-<!-- 4. Firebase Cloud Functionaliteit -->
-<script type="module">
-    import { initializeApp } from "https://gstatic.com";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://gstatic.com";
-    import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://gstatic.com";
-    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://gstatic.com";
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
 
-    // Firebase Configuratie van Free Mind Beauty
-    const firebaseConfig = {
-        apiKey: "AIzaSyBQG87pGB_P-_AT01Ltl-S922WbUV0aGyU",
-        authDomain: "free-mind-beauty.firebaseapp.com",
-        projectId: "free-mind-beauty",
-        storageBucket: "free-mind-beauty.firebasestorage.app",
-        messagingSenderId: "10687471548",
-        appId: "1:10687471548:web:8660669a7fba4a1cc595b9",
-        measurementId: "G-YTXW8M0LHF"
-    };
+        let currentUser = null;
 
-    // Firebase Initialiseren
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    const storage = getStorage(app);
-
-    let currentUser = null;
-
-    // Luister naar inlogstatus
-    onAuthStateChanged(auth, (user) => {
-        currentUser = user;
-    });
-
-    // Knoppen koppelen aan acties
-    document.getElementById('adminBtn').addEventListener('click', function() {
-        if (currentUser) {
-            openModal('adminModal');
-        } else {
-            openModal('loginModal');
-        }
-    });
-
-    document.getElementById('closeLoginBtn').addEventListener('click', () => closeModal('loginModal'));
-    document.getElementById('closeAdminBtn').addEventListener('click', () => closeModal('adminModal'));
-
-    function openModal(modalId) {
-        document.getElementById(modalId).classList.add('active');
-    }
-
-    function closeModal(modalId) {
-        document.getElementById(modalId).classList.remove('active');
-    }
-
-    // Inloggen handler
-    document.getElementById('loginForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        const email = document.getElementById('adminEmail').value;
-        const password = document.getElementById('password').value;
-        
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
-            alert('✅ Succesvol ingelogd!');
-            closeModal('loginModal');
-            openModal('adminModal');
-            document.getElementById('password').value = '';
-        } catch (error) {
-            alert('❌ Inloggen mislukt: Het ingevulde e-mailadres of wachtwoord is onjuist.');
-        }
-    });
-
-    // Uploaden naar cloud handler
-    document.getElementById('uploadForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        const fileField = document.getElementById('photoFile');
-        const file = fileField.files[0]; 
-        const category = document.getElementById('category').value;
-
-        if (!file || !category) {
-            alert('❌ Selecteer alstublieft een foto en categorie');
-            return;
-        }
-
-        if (!currentUser) {
-            alert('❌ Je moet ingelogd zijn om te kunnen uploaden.');
-            return;
-        }
-
-        try {
-            // 1. Upload naar Storage bucket
-            const storageRef = ref(storage, `gallery/${Date.now()}_${file.name}`);
-            const snapshot = await uploadBytes(storageRef, file);
-            
-            // 2. Download URL genereren
-            const downloadURL = await getDownloadURL(snapshot.ref);
-
-            // 3. Document opslaan in Firestore database
-            const photoItem = {
-                src: downloadURL,
-                category: category,
-                alt: `Foto - ${category}`,
-                timestamp: new Date().toISOString()
-            };
-
-            await addDoc(collection(db, "photos"), photoItem);
-
-            // 4. Toevoegen aan scherm
-            addPhotoToGallery(photoItem);
-
-            alert('✅ Foto succesvol geüpload naar de Cloud!');
-            fileField.value = '';
-            document.getElementById('uploadForm').reset();
-            closeModal('adminModal');
-
-        } catch (error) {
-            console.error(error);
-            alert('❌ Opslaan mislukt. Controleer of je database Security Rules goed staan ingesteld.');
-        }
-    });
-
-    // Visueel toevoegen aan de HTML grid
-    function addPhotoToGallery(photoItem) {
-        const gallery = document.getElementById('galleryGrid');
-        if (!gallery) return; 
-        
-        const newItem = document.createElement('div');
-        newItem.className = 'gallery-item';
-        newItem.setAttribute('data-category', photoItem.category);
-        
-        let displayCategory = photoItem.category;
-        if(displayCategory === "NAGELS") displayCategory = "💅 Nagels";
-        if(displayCategory === "SCHOONHEID") displayCategory = "👄 Schoonheid";
-        if(displayCategory === "PEDICURE") displayCategory = "👣 Pedicure";
-        if(displayCategory === "BEHANDELING") displayCategory = "💆 Behandeling";
-        if(displayCategory === "SKINCARE") displayCategory = "✨ Skincare";
-
-   newItem.innerHTML = `
-            <img src="${photoItem.src}" alt="${photoItem.alt}">
-            <div class="gallery-overlay" data-label="${displayCategory}"></div>
-        `;
-        gallery.appendChild(newItem);
-
-        const activeTab = document.querySelector('.gallery-tab.active');
-        if (activeTab) {
-            filterGallery(activeTab.getAttribute('data-category'));
-        }
-    }
-
-    // Filter categorieën tabs logica
-    document.querySelectorAll('.gallery-tab').forEach(tab => {
-        tab.addEventListener('click', function() {
-            document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
-            filterGallery(this.getAttribute('data-category'));
+        // Monitor login status
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            console.log("Auth status:", user ? "Logged in" : "Logged out");
         });
-    });
 
-    function filterGallery(category) {
-        const items = document.querySelectorAll('.gallery-item');
-        items.forEach(item => {
-            if (category === 'all' || item.getAttribute('data-category') === category) {
-                item.style.display = "block"; 
+        // Admin button click handler
+        document.getElementById('adminBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentUser) {
+                openModal('adminModal');
             } else {
-                item.style.display = "none"; 
+                openModal('loginModal');
             }
         });
-    }
 
-    // Foto's direct inladen bij openen website
-    window.addEventListener('DOMContentLoaded', async function() {
-        try {
-            const q = query(collection(db, "photos"), orderBy("timestamp", "desc"));
-            const querySnapshot = await getDocs(q);
-            
-            querySnapshot.forEach((doc) => {
-                addPhotoToGallery(doc.data());
-            });
-        } catch (error) {
-            console.error("Fout bij ophalen foto's uit Firestore:", error);
+        // Close button handlers
+        document.getElementById('closeLoginBtn').addEventListener('click', () => closeModal('loginModal'));
+        document.getElementById('closeLoginBtn2').addEventListener('click', () => closeModal('loginModal'));
+        document.getElementById('closeAdminBtn').addEventListener('click', () => closeModal('adminModal'));
+        document.getElementById('closeAdminBtn2').addEventListener('click', () => closeModal('adminModal'));
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
         }
-    });
 
-    // Sluiten bij buiten de modal klikken
-    window.addEventListener('click', function(event) {
-        if (event.target === document.getElementById('loginModal')) closeModal('loginModal');
-        if (event.target === document.getElementById('adminModal')) closeModal('adminModal');
-    });
-</script>
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
 
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                alert('✅ Succesvol ingelogd!');
+                closeModal('loginModal');
+                openModal('adminModal');
+                document.getElementById('adminEmail').value = '';
+                document.getElementById('password').value = '';
+            } catch (error) {
+                console.error("Login error:", error);
+                alert('❌ Inloggen mislukt: Het ingevulde e-mailadres of wachtwoord is onjuist.');
+            }
+        });
 
+        // Upload form handler
+        document.getElementById('uploadForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const fileField = document.getElementById('photoFile');
+            const file = fileField.files[0]; 
+            const category = document.getElementById('category').value;
+
+            if (!file || !category) {
+                alert('❌ Selecteer alstublieft een foto en categorie');
+                return;
+            }
+
+            if (!currentUser) {
+                alert('❌ Je moet ingelogd zijn om te kunnen uploaden.');
+                return;
+            }
+
+            try {
+                const storageRef = ref(storage, `gallery/${Date.now()}_${file.name}`);
+                const snapshot = await uploadBytes(storageRef, file);
+                const downloadURL = await getDownloadURL(snapshot.ref);
+
+                const photoItem = {
+                    src: downloadURL,
+                    category: category,
+                    alt: `Foto - ${category}`,
+                    timestamp: new Date()
+                };
+
+                await addDoc(collection(db, "photos"), photoItem);
+                addPhotoToGallery(photoItem);
+
+                alert('✅ Foto succesvol geüpload!');
+                fileField.value = '';
+                document.getElementById('category').value = '';
+                document.getElementById('uploadForm').reset();
+                closeModal('adminModal');
+
+            } catch (error) {
+                console.error("Upload error:", error);
+                alert('❌ Upload mislukt: ' + error.message);
+            }
+        });
+
+        // Add photo to gallery
+        function addPhotoToGallery(photoItem) {
+            const gallery = document.getElementById('galleryGrid');
+            if (!gallery) return; 
+            
+            const newItem = document.createElement('div');
+            newItem.className = 'gallery-item';
+            newItem.setAttribute('data-category', photoItem.category);
+            
+            const categoryMap = {
+                "NAGELS": "💅 Nagels",
+                "SCHOONHEID": "👄 Schoonheid",
+                "PEDICURE": "👣 Pedicure",
+                "BEHANDELING": "💆 Behandeling",
+                "SKINCARE": "✨ Skincare"
+            };
+            const displayCategory = categoryMap[photoItem.category] || photoItem.category;
+
+            newItem.innerHTML = `
+                <img src="${photoItem.src}" alt="${photoItem.alt}" loading="lazy">
+                <div class="gallery-overlay" data-label="${displayCategory}"></div>
+            `;
+            gallery.insertBefore(newItem, gallery.firstChild);
+        }
+
+        // Gallery filter tabs
+        document.querySelectorAll('.gallery-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                filterGallery(this.getAttribute('data-category'));
+            });
+        });
+
+        // Filter gallery by category
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        // Load photos from Firestore on page load
+        window.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const q = query(collection(db, "photos"), orderBy("timestamp", "desc"));
+                const querySnapshot = await getDocs(q);
+                
+                console.log(`Loaded ${querySnapshot.docs.length} photos`);
+                
+                querySnapshot.forEach((doc) => {
+                    addPhotoToGallery(doc.data());
+                });
+            } catch (error) {
+                console.error("Error loading photos:", error);
+            }
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            const loginModal = document.getElementById('loginModal');
+            const adminModal = document.getElementById('adminModal');
+            
+            if (event.target === loginModal) closeModal('loginModal');
+            if (event.target === adminModal) closeModal('adminModal');
+        });
+    </script>
+</body>
+</html>
