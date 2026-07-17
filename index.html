@@ -1629,194 +1629,192 @@
         </div>
     </div>
 
-    <!-- Firebase Script -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+   <!-- Firebase Script -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBQG87pGB_P-_AT01Ltl-S922WbUV0aGyU",
-            authDomain: "free-mind-beauty.firebaseapp.com",
-            projectId: "free-mind-beauty",
-            storageBucket: "free-mind-beauty.firebasestorage.app",
-            messagingSenderId: "10687471548",
-            appId: "1:10687471548:web:8660669a7fba4a1cc595b9",
-            measurementId: "G-YTXW8M0LHF"
-        };
+    const firebaseConfig = {
+        apiKey: "AIzaSyBQG87pGB_P-_AT01Ltl-S922WbUV0aGyU",
+        authDomain: "free-mind-beauty.firebaseapp.com",
+        projectId: "free-mind-beauty",
+        storageBucket: "free-mind-beauty.firebasestorage.app",
+        messagingSenderId: "10687471548",
+        appId: "1:10687471548:web:8660669a7fba4a1cc595b9",
+        measurementId: "G-YTXW8M0LHF"
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const storage = getStorage(app);
-
-        let currentUser = null;
-
-        // Monitor login status
-        onAuthStateChanged(auth, (user) => {
-            currentUser = user;
-            console.log("Auth status:", user ? "Ingelogd" : "Afgemeld");
-        });
-
-        // Admin button click handler
-        document.getElementById('adminBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            if (currentUser) {
-                openModal('adminModal');
-            } else {
-                openModal('loginModal');
-            }
-        });
-
-        // Close button handlers
-        document.getElementById('closeLoginBtn').addEventListener('click', () => closeModal('loginModal'));
-        document.getElementById('closeLoginBtn2').addEventListener('click', () => closeModal('loginModal'));
-        document.getElementById('closeAdminBtn').addEventListener('click', () => closeModal('adminModal'));
-        document.getElementById('closeAdminBtn2').addEventListener('click', () => closeModal('adminModal'));
-
-        // Modal functions
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-        }
-
-        // Login form handler
-        document.getElementById('loginForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const email = document.getElementById('adminEmail').value;
-            const password = document.getElementById('password').value;
-            
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                alert('✅ Succesvol ingelogd!');
-                closeModal('loginModal');
-                openModal('adminModal');
-                document.getElementById('adminEmail').value = '';
-                document.getElementById('password').value = '';
-            } catch (error) {
-                console.error("Login error:", error);
-                alert('❌ Inloggen mislukt: Het ingevulde e-mailadres of wachtwoord is onjuist.');
-            }
-        });
-
-        // Upload form handler
-        document.getElementById('uploadForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const fileField = document.getElementById('photoFile');
-            const file = fileField.files[0]; 
-            const category = document.getElementById('category').value;
-
-            if (!file || !category) {
-                alert('❌ Selecteer alstublieft een foto en categorie');
-                return;
-            }
-
-            if (!currentUser) {
-                alert('❌ Je moet ingelogd zijn om te kunnen uploaden.');
-                return;
-            }
-
-            try {
-                const storageRef = ref(storage, `gallery/${Date.now()}_${file.name}`);
-                const snapshot = await uploadBytes(storageRef, file);
-                const downloadURL = await getDownloadURL(snapshot.ref);
-
-                const photoItem = {
-                    src: downloadURL,
-                    category: category,
-                    alt: `Foto - ${category}`,
-                    timestamp: new Date()
-                };
-
-                await addDoc(collection(db, "photos"), photoItem);
-                addPhotoToGallery(photoItem);
-
-                alert('✅ Foto succesvol geüpload!');
-                fileField.value = '';
-                document.getElementById('category').value = '';
-                document.getElementById('uploadForm').reset();
-                closeModal('adminModal');
-
-            } catch (error) {
-                console.error("Upload error:", error);
-                alert('❌ Upload mislukt: ' + error.message);
-            }
-        });
-
-        // Add photo to gallery
-        function addPhotoToGallery(photoItem) {
-            const gallery = document.getElementById('galleryGrid');
-            if (!gallery) return; 
-            
-            const newItem = document.createElement('div');
-            newItem.className = 'gallery-item';
-            newItem.setAttribute('data-category', photoItem.category);
-            
-            const categoryMap = {
-                "NAGELS": "💅 Nagels",
-                "SCHOONHEID": "👄 Schoonheid",
-                "PEDICURE": "👣 Pedicure",
-                "Massage": "💆 Massage",
-                "Gezichtsverzorging": "✨ Gezichtsverzorging"
-            };
-            const displayCategory = categoryMap[photoItem.category] || photoItem.category;
-
-            newItem.innerHTML = `
-                <img src="${photoItem.src}" alt="${photoItem.alt}" loading="lazy">
-                <div class="gallery-overlay" data-label="${displayCategory}"></div>
-            `;
-            gallery.insertBefore(newItem, gallery.firstChild);
-        }
-
-        // Gallery filter tabs
-        document.querySelectorAll('.gallery-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                filterGallery(this.getAttribute('data-category'));
-            });
-        });
-
-        // Filter gallery by category
-        function filterGallery(category) {
-            const items = document.querySelectorAll('.gallery-item');
-            items.forEach(item => {
-                if (category === 'all' || item.getAttribute('data-category') === category) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-        }
-
-        // Load photos from Firestore on page load
-        window.addEventListener('DOMContentLoaded', async function() {
-            try {
-                const q = query(collection(db, "photos"), orderBy("timestamp", "desc"));
-                const querySnapshot = await getDocs(q);
-                
-                console.log(`Geladen ${querySnapshot.docs.length} foto's`);
-                
-                querySnapshot.forEach((doc) => {
-                    addPhotoToGallery(doc.data());
-                });
-            } catch (error) {
-                console.error("Fout bij laden van foto's:", error);
-            }
-        });
-
-        // 3. DE ONTBREKENDE SCHAKEL: Initialiseer Firebase services
+    // 1. Firebase éénmalig correct initialiseren bovenin
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
     const storage = getStorage(app);
 
-    // Vanaf hier kunt u de 'auth', 'db' en 'storage' variabelen gebruiken in uw functies.
+    let currentUser = null;
+
+    // Monitor login status
+    onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+        console.log("Auth status:", user ? "Ingelogd" : "Afgemeld");
+    });
+
+    // Admin button click handler
+    document.getElementById('adminBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (currentUser) {
+            openModal('adminModal');
+        } else {
+            openModal('loginModal');
+        }
+    });
+
+    // Close button handlers
+    document.getElementById('closeLoginBtn').addEventListener('click', () => closeModal('loginModal'));
+    document.getElementById('closeLoginBtn2').addEventListener('click', () => closeModal('loginModal'));
+    document.getElementById('closeAdminBtn').addEventListener('click', () => closeModal('adminModal'));
+    document.getElementById('closeAdminBtn2').addEventListener('click', () => closeModal('adminModal'));
+
+    // Modal functions
+    function openModal(modalId) {
+        document.getElementById(modalId).classList.add('active');
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    }
+
+    // Login form handler
+    document.getElementById('loginForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const email = document.getElementById('adminEmail').value;
+        const password = document.getElementById('password').value;
+        
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            alert('✅ Succesvol ingelogd!');
+            closeModal('loginModal');
+            openModal('adminModal');
+            document.getElementById('adminEmail').value = '';
+            document.getElementById('password').value = '';
+        } catch (error) {
+            console.error("Login error:", error);
+            alert('❌ Inloggen mislukt: Het ingevulde e-mailadres of wachtwoord is onjuist.');
+        }
+    });
+
+    // Upload form handler
+    document.getElementById('uploadForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const fileField = document.getElementById('photoFile');
+        const file = fileField.files[0]; 
+        const category = document.getElementById('category').value;
+
+        if (!file || !category) {
+            alert('❌ Selecteer alstublieft een foto en categorie');
+            return;
+        }
+
+        if (!currentUser) {
+            alert('❌ Je moet ingelogd zijn om te kunnen uploaden.');
+            return;
+        }
+
+        try {
+            // Unieke bestandsnaam maken om overschrijven te voorkomen
+            const storageRef = ref(storage, `gallery/${Date.now()}_${file.name}`);
+            const snapshot = await uploadBytes(storageRef, file);
+            const downloadURL = await getDownloadURL(snapshot.ref);
+
+            const photoItem = {
+                src: downloadURL,
+                category: category,
+                alt: `Foto - ${category}`,
+                timestamp: new Date()
+            };
+
+            await addDoc(collection(db, "photos"), photoItem);
+            addPhotoToGallery(photoItem);
+
+            alert('✅ Foto succesvol geüpload!');
+            fileField.value = '';
+            document.getElementById('category').value = '';
+            document.getElementById('uploadForm').reset();
+            closeModal('adminModal');
+
+        } catch (error) {
+            console.error("Upload error:", error);
+            alert('❌ Upload mislukt: ' + error.message);
+        }
+    });
+
+    // Add photo to gallery
+    function addPhotoToGallery(photoItem) {
+        const gallery = document.getElementById('galleryGrid');
+        if (!gallery) return; 
+        
+        const newItem = document.createElement('div');
+        newItem.className = 'gallery-item';
+        newItem.setAttribute('data-category', photoItem.category);
+        
+        const categoryMap = {
+            "NAGELS": "💅 Nagels",
+            "SCHOONHEID": "👄 Schoonheid",
+            "PEDICURE": "👣 Pedicure",
+            "Massage": "💆 Massage",
+            "Gezichtsverzorging": "✨ Gezichtsverzorging"
+        };
+        const displayCategory = categoryMap[photoItem.category] || photoItem.category;
+
+        newItem.innerHTML = `
+            <img src="${photoItem.src}" alt="${photoItem.alt}" loading="lazy">
+            <div class="gallery-overlay" data-label="${displayCategory}"></div>
+        `;
+        gallery.insertBefore(newItem, gallery.firstChild);
+    }
+
+    // Gallery filter tabs
+    document.querySelectorAll('.gallery-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            filterGallery(this.getAttribute('data-category'));
+        });
+    });
+
+    // Filter gallery by category
+    function filterGallery(category) {
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach(item => {
+            if (category === 'all' || item.getAttribute('data-category') === category) {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
+            }
+        });
+    }
+
+    // Load photos from Firestore on page load (Aangepast naar window.load of directe uitvoering)
+    async function loadPhotos() {
+        try {
+            const q = query(collection(db, "photos"), orderBy("timestamp", "desc"));
+            const querySnapshot = await getDocs(q);
+            
+            console.log(`Geladen ${querySnapshot.docs.length} foto's`);
+            
+            querySnapshot.forEach((doc) => {
+                addPhotoToGallery(doc.data());
+            });
+        } catch (error) {
+            console.error("Fout bij laden van foto's:", error);
+        }
+    }
+    
+    // Direct uitvoeren omdat DOM bij type="module" meestal al geladen is
+    loadPhotos();
+
     console.log("Firebase succesvol geïnitialiseerd!");
 </script>
-</body>
+
 </html>
