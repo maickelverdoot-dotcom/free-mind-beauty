@@ -1400,7 +1400,7 @@
         </div>
     </header>
 
-    <!-- 1. DE ADMIN KNOP (Staat nu vast LINKSBOVEN op je scherm) -->
+<!-- 1. DE ADMIN KNOP (Staat nu vast LINKSBOVEN op je scherm) -->
     <button id="adminBtn" class="admin-toggle-btn">🔐 Admin Panel</button>
 
     <!-- 2. LOGIN MODAL -->
@@ -1410,11 +1410,11 @@
             <form id="loginForm">
                 <div class="form-group">
                     <label for="adminEmail">E-mailadres:</label>
-                    <input type="email" id="adminEmail" required placeholder="bijv. admin@mail.com">
+                    <input type="email" id="adminEmail" required placeholder="bijv. admin@mail.com" autocomplete="email">
                 </div>
                 <div class="form-group">
                     <label for="password">Wachtwoord:</label>
-                    <input type="password" id="password" required placeholder="Wachtwoord">
+                    <input type="password" id="password" required placeholder="Wachtwoord" autocomplete="current-password">
                 </div>
                 <div class="modal-buttons">
                     <button type="submit" class="btn-submit">Inloggen</button>
@@ -1431,7 +1431,8 @@
             <form id="uploadForm">
                 <div class="form-group">
                     <label for="photoFile">Kies een foto:</label>
-                    <input type="file" id="photoFile" accept="image/*" required>
+                    <!-- capture="environment" zorgt ervoor dat je op mobiel direct de camera kunt openen -->
+                    <input type="file" id="photoFile" accept="image/*" capture="environment" required>
                 </div>
                 <div class="form-group">
                     <label for="category">Categorie:</label>
@@ -1456,8 +1457,8 @@
 <style>
     .admin-toggle-btn {
         position: fixed;
-        top: 20px;         /* Verplaatst naar de bovenkant */
-        left: 20px;        /* Verplaatst naar de linkerkant */
+        top: 20px;         
+        left: 20px;        
         background-color: #333;
         color: white;
         padding: 12px 20px;
@@ -1465,11 +1466,13 @@
         border-radius: 50px;
         cursor: pointer;
         box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        z-index: 9999;     /* Zorgt dat de knop altijd bovenop alle elementen ligt */
+        z-index: 9999;     
         font-weight: bold;
-        transition: background-color 0.2s;
+        opacity: 0;
+        transition: opacity 0.3s ease, background-color 0.2s ease;
     }
     .admin-toggle-btn:hover {
+        opacity: 1;
         background-color: #555;
     }
 
@@ -1528,7 +1531,7 @@
     // Firebase Configuratie van Free Mind Beauty
     const firebaseConfig = {
         apiKey: "AIzaSyBQG87pGB_P-_AT01Ltl-S922WbUV0aGyU",
-        authDomain: "://firebaseapp.com",
+        authDomain: "free-mind-beauty.firebaseapp.com",
         projectId: "free-mind-beauty",
         storageBucket: "free-mind-beauty.firebasestorage.app",
         messagingSenderId: "10687471548",
@@ -1590,7 +1593,7 @@
     document.getElementById('uploadForm').addEventListener('submit', async function(event) {
         event.preventDefault();
         const fileField = document.getElementById('photoFile');
-        const file = fileField.files[0]; // 🚀 HIER ZAT DE FOUT: Nu pakt hij correct het eerste geselecteerde bestand
+        const file = fileField.files[0]; 
         const category = document.getElementById('category').value;
 
         if (!file || !category) {
@@ -1638,13 +1641,12 @@
     // Visueel toevoegen aan de HTML grid
     function addPhotoToGallery(photoItem) {
         const gallery = document.getElementById('galleryGrid');
-        if (!gallery) return; // Vangnet als grid niet bestaat
+        if (!gallery) return; 
         
         const newItem = document.createElement('div');
         newItem.className = 'gallery-item';
         newItem.setAttribute('data-category', photoItem.category);
         
-        // Zorg dat de emoji's netjes worden weergegeven in de overlay op basis van jouw tabs
         let displayCategory = photoItem.category;
         if(displayCategory === "NAGELS") displayCategory = "💅 Nagels";
         if(displayCategory === "SCHOONHEID") displayCategory = "👄 Schoonheid";
@@ -1652,9 +1654,9 @@
         if(displayCategory === "BEHANDELING") displayCategory = "💆 Behandeling";
         if(displayCategory === "SKINCARE") displayCategory = "✨ Skincare";
 
-        newItem.innerHTML = `
+   newItem.innerHTML = `
             <img src="${photoItem.src}" alt="${photoItem.alt}">
-            <div class="gallery-overlay">${displayCategory}</div>
+            <div class="gallery-overlay" data-label="${displayCategory}"></div>
         `;
         gallery.appendChild(newItem);
 
@@ -1677,9 +1679,9 @@
         const items = document.querySelectorAll('.gallery-item');
         items.forEach(item => {
             if (category === 'all' || item.getAttribute('data-category') === category) {
-                item.style.display = "block"; // toont item
+                item.style.display = "block"; 
             } else {
-                item.style.display = "none"; // verbergt item
+                item.style.display = "none"; 
             }
         });
     }
@@ -1704,4 +1706,5 @@
         if (event.target === document.getElementById('adminModal')) closeModal('adminModal');
     });
 </script>
+
 
