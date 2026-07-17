@@ -1452,7 +1452,6 @@
             </form>
         </div>
     </div>
-
 <!-- CSS Styling voor de Modals en de Knop linksboven -->
 <style>
     .admin-toggle-btn {
@@ -1468,9 +1467,14 @@
         box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         z-index: 9999;     
         font-weight: bold;
+        
+        /* 🚀 Knop is volledig onzichtbaar tot hover */
         opacity: 0;
+        /* Zorgt voor een vloeiende overgang van 0.3 seconden */
         transition: opacity 0.3s ease, background-color 0.2s ease;
     }
+    
+    /* 🚀 Knop verschijnt direct zodra je met de muis linksboven gaat staan */
     .admin-toggle-btn:hover {
         opacity: 1;
         background-color: #555;
@@ -1520,6 +1524,7 @@
     .btn-submit { background: #4CAF50; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; flex: 1; font-weight: bold; }
     .btn-close { background: #f44336; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; flex: 1; font-weight: bold; }
 </style>
+
 
 <!-- 4. Firebase Cloud Functionaliteit -->
 <script type="module">
