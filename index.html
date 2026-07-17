@@ -1455,10 +1455,7 @@
                         <span class="service-name">Basis Gezichtsverzorging</span>
                         <span class="service-price">€35</span>
                     </div>
-                    <div class="service-item">
-                        <span class="service-name">Luxe Gezichtsverzorging</span>
-                        <span class="service-price">€65</span>
-                    </div>
+            
                 </div>
 
                 <!-- ===== MASSAGE & LICHAAM =====
@@ -1471,7 +1468,7 @@
                     <h3>💆 Massage & Lichaam</h3>
                     <div class="service-item">
                         <span class="service-name">Volledige Lichaamsbehandeling</span>
-                        <span class="service-price">€55</span>
+                        <span class="service-price">€50</span>
                     </div>
                     <div class="service-item">
                         <span class="service-name">Rug, Nek & Schouders</span>
@@ -1486,9 +1483,9 @@
                 <!-- ===== HANDEN & VOETEN =====
                      PRIJZEN HIER AANPASSEN:
                      - Basis Manicure: €15
-                     - Luxe Manicure (Gellak): €30
+                     - Luxe Manicure (Gellak): €25
                      - Basis Pedicure: €18
-                     - Luxe Pedicure (Gellak): €30
+                     - Luxe Pedicure (Gellak): €25
                 -->
                 <div class="service-card">
                     <h3>💅 Handen & Voeten</h3>
@@ -1498,15 +1495,15 @@
                     </div>
                     <div class="service-item">
                         <span class="service-name">Luxe Manicure (Gellak)</span>
-                        <span class="service-price">€30</span>
+                        <span class="service-price">€25</span>
                     </div>
                     <div class="service-item">
                         <span class="service-name">Basis Pedicure</span>
-                        <span class="service-price">€18</span>
+                        <span class="service-price">€15</span>
                     </div>
                     <div class="service-item">
                         <span class="service-name">Luxe Pedicure (Gellak)</span>
-                        <span class="service-price">€30</span>
+                        <span class="service-price">€25</span>
                     </div>
                 </div>
             </div>
@@ -1812,14 +1809,14 @@
             }
         });
 
-        // Close modals when clicking outside
-        window.addEventListener('click', function(event) {
-            const loginModal = document.getElementById('loginModal');
-            const adminModal = document.getElementById('adminModal');
-            
-            if (event.target === loginModal) closeModal('loginModal');
-            if (event.target === adminModal) closeModal('adminModal');
-        });
-    </script>
+        // 3. DE ONTBREKENDE SCHAKEL: Initialiseer Firebase services
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    // Vanaf hier kunt u de 'auth', 'db' en 'storage' variabelen gebruiken in uw functies.
+    console.log("Firebase succesvol geïnitialiseerd!");
+</script>
 </body>
 </html>
