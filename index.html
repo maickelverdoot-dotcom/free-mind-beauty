@@ -1458,7 +1458,7 @@
                         <span class="service-price">€15</span>
                     </div>
                     <div class="service-item">
-                      <!-- Fotogalerij Sectie -->
+                     <!-- Fotogalerij Sectie -->
     <section id="galerij" class="gallery">
         <div class="container">
             <h2 class="section-title">Sfeerimpressie ✨</h2>
@@ -1503,7 +1503,7 @@
                     <i class="fab fa-whatsapp"></i>
                     <h3>WhatsApp</h3>
                     <p>
-                        <a href="https://wa.me/32497076277" target="_blank">Chat via WhatsApp</a>
+                        <a href="https://wa.me" target="_blank">Chat via WhatsApp</a>
                     </p>
                 </div>
             </div>
@@ -1519,7 +1519,7 @@
                 <a href="tel:+32497076277" class="btn btn-call">
                     <i class="fas fa-phone"></i> Bel Nu
                 </a>
-                <a href="https://wa.me/32497076277" target="_blank" class="btn btn-whatsapp-large">
+                <a href="https://wa.me" target="_blank" class="btn btn-whatsapp-large">
                     <i class="fab fa-whatsapp"></i> Chat WhatsApp
                 </a>
             </div>
@@ -1531,7 +1531,7 @@
         <p>&copy; 2026 Free Mind Beauty | Alle rechten voorbehouden | Gemaakt door: Maickel V</p>
     </footer>   
     
-    <!-- 1. DE ADMIN KNOP (Staat nu vast rechtsonder in je scherm) -->
+    <!-- 1. DE ADMIN KNOP (Staat nu vast LINKSBOVEN op je scherm) -->
     <button id="adminBtn" class="admin-toggle-btn">🔐 Admin Panel</button>
 
     <!-- 2. LOGIN MODAL -->
@@ -1583,6 +1583,72 @@
         </div>
     </div>
 
+<!-- CSS Styling voor de Modals en de Knop linksboven -->
+<style>
+    .admin-toggle-btn {
+        position: fixed;
+        top: 20px;         /* Verplaatst naar de bovenkant */
+        left: 20px;        /* Verplaatst naar de linkerkant */
+        background-color: #333;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        z-index: 9999;     /* Zorgt dat de knop altijd bovenop alle elementen ligt */
+        font-weight: bold;
+        transition: background-color 0.2s;
+    }
+    .admin-toggle-btn:hover {
+        background-color: #555;
+    }
+
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+    }
+    .modal-overlay.active {
+        display: flex;
+    }
+    .modal-content {
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        color: #333;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .form-group input, .form-group select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .modal-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .btn-submit { background: #4CAF50; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; flex: 1; font-weight: bold; }
+    .btn-close { background: #f44336; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; flex: 1; font-weight: bold; }
+</style>
+
 <!-- 4. Firebase Cloud Functionaliteit -->
 <script type="module">
     import { initializeApp } from "https://gstatic.com";
@@ -1593,7 +1659,7 @@
     // Firebase Configuratie van Free Mind Beauty
     const firebaseConfig = {
         apiKey: "AIzaSyBQG87pGB_P-_AT01Ltl-S922WbUV0aGyU",
-        authDomain: "free-mind-beauty.firebaseapp.com",
+        authDomain: "://firebaseapp.com",
         projectId: "free-mind-beauty",
         storageBucket: "free-mind-beauty.firebasestorage.app",
         messagingSenderId: "10687471548",
@@ -1631,7 +1697,6 @@
     }
 
     function closeModal(modalId) {
-        document.getElementById(modalId).classList.remove('remove'); // vangnet
         document.getElementById(modalId).classList.remove('active');
     }
 
@@ -1656,7 +1721,7 @@
     document.getElementById('uploadForm').addEventListener('submit', async function(event) {
         event.preventDefault();
         const fileField = document.getElementById('photoFile');
-        const file = fileField.files[0];
+        const file = fileField.files[0]; // 🚀 HIER ZAT DE FOUT: Nu pakt hij correct het eerste geselecteerde bestand
         const category = document.getElementById('category').value;
 
         if (!file || !category) {
@@ -1703,21 +1768,71 @@
 
     // Visueel toevoegen aan de HTML grid
     function addPhotoToGallery(photoItem) {
-  <span class="service-name">Luxe Manicure (Gellak)</span>
-                        <span class="service-price">€30</span>
-                    </div>
-                    <div class="service-item">
-                        <span class="service-name">Basis Pedicure</span>
-                        <span class="service-price">€18</span>
-                    </div>
-                    <div class="service-item">
-                        <span class="service-name">Luxe Pedicure (Gellak)</span>
-                        <span class="service-price">€30</span>
-                    </div>
-                </div>
+        const gallery = document.getElementById('galleryGrid');
+        if (!gallery) return; // Vangnet als grid niet bestaat
+        
+        const newItem = document.createElement('div');
+        newItem.className = 'gallery-item';
+        newItem.setAttribute('data-category', photoItem.category);
+        
+        // Zorg dat de emoji's netjes worden weergegeven in de overlay op basis van jouw tabs
+        let displayCategory = photoItem.category;
+        if(displayCategory === "NAGELS") displayCategory = "💅 Nagels";
+        if(displayCategory === "SCHOONHEID") displayCategory = "👄 Schoonheid";
+        if(displayCategory === "PEDICURE") displayCategory = "👣 Pedicure";
+        if(displayCategory === "BEHANDELING") displayCategory = "💆 Behandeling";
+        if(displayCategory === "SKINCARE") displayCategory = "✨ Skincare";
 
-            </div>
-        </div>
-    </section>
+        newItem.innerHTML = `
+            <img src="${photoItem.src}" alt="${photoItem.alt}">
+            <div class="gallery-overlay">${displayCategory}</div>
+        `;
+        gallery.appendChild(newItem);
 
-   
+        const activeTab = document.querySelector('.gallery-tab.active');
+        if (activeTab) {
+            filterGallery(activeTab.getAttribute('data-category'));
+        }
+    }
+
+    // Filter categorieën tabs logica
+    document.querySelectorAll('.gallery-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            filterGallery(this.getAttribute('data-category'));
+        });
+    });
+
+    function filterGallery(category) {
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach(item => {
+            if (category === 'all' || item.getAttribute('data-category') === category) {
+                item.style.display = "block"; // toont item
+            } else {
+                item.style.display = "none"; // verbergt item
+            }
+        });
+    }
+
+    // Foto's direct inladen bij openen website
+    window.addEventListener('DOMContentLoaded', async function() {
+        try {
+            const q = query(collection(db, "photos"), orderBy("timestamp", "desc"));
+            const querySnapshot = await getDocs(q);
+            
+            querySnapshot.forEach((doc) => {
+                addPhotoToGallery(doc.data());
+            });
+        } catch (error) {
+            console.error("Fout bij ophalen foto's uit Firestore:", error);
+        }
+    });
+
+    // Sluiten bij buiten de modal klikken
+    window.addEventListener('click', function(event) {
+        if (event.target === document.getElementById('loginModal')) closeModal('loginModal');
+        if (event.target === document.getElementById('adminModal')) closeModal('adminModal');
+    });
+</script>
+
