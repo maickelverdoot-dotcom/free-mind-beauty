@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
+  <!DOCTYPE html>
+<html lang="nl">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Mind Beauty | Natuurlijke Schoonheid</title>
@@ -50,6 +53,7 @@
             line-height: 1.8;
             overflow-x: hidden;
         }
+
 
         /* ===== NAVIGATIE ===== */
         .navbar {
@@ -578,15 +582,11 @@
             white-space: nowrap;
             letter-spacing: 0.5px;
         }
-
-        /* ===== GALLERY SECTIE ===== */
+/* ===== GALLERY SECTIE ===== */
         .gallery {
             padding: 6rem 2rem;
             background: linear-gradient(135deg, var(--cream) 0%, var(--light-blush) 100%);
             position: relative;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
             min-height: 400px;
         }
 
@@ -604,10 +604,9 @@
         }
 
         .gallery .container {
-            widht: 100%;
-            max-widht: 600px;
-            height: auto;
-            object-fit: cver;
+            width: 100%;
+            max-width: 1200px; /* Verbreed naar 1200px zodat je fotogrid mooi de ruimte krijgt */
+            margin: 0 auto;
         }
 
         .gallery-tabs {
@@ -616,6 +615,8 @@
             gap: 1rem;
             flex-wrap: wrap;
             margin-bottom: 3rem;
+            position: relative;
+            z-index: 10;
         }
 
         .gallery-tab {
@@ -630,12 +631,7 @@
             font-family: 'Quicksand', sans-serif;
         }
 
-        .gallery-tab:hover {
-            background: var(--primary-sage);
-            color: white;
-        }
-
-        .gallery-tab.active {
+        .gallery-tab:hover, .gallery-tab.active {
             background: var(--primary-sage);
             color: white;
         }
@@ -645,6 +641,8 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2.2rem;
             margin-top: 3rem;
+            position: relative;
+            z-index: 10;
         }
 
         .gallery-item {
@@ -674,31 +672,48 @@
             transform: scale(1.12);
         }
 
+        /* Donkere waas over de foto bij hover */
         .gallery-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(188, 201, 191, 0.75), rgba(240, 220, 211, 0.75));
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.15); /* Subtiele verdonkering van de foto */
             opacity: 0;
             transition: opacity 0.4s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1.3rem;
+            z-index: 2;
+        }
+
+        /* De zachtroze badge met witte tekst IN de overlay */
+        .gallery-overlay::before {
+            content: attr(data-label); /* Dit pakt automatisch de tekst van de categorie */
+            background-color: #fce6dd !important; /* Pastelroze */
+            color: #ffffff !important;            /* Witte tekst */
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
             letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(10px);
+            transition: transform 0.4s ease;
         }
 
         .gallery-item:hover .gallery-overlay {
             opacity: 1;
         }
 
-        .gallery-item.hidden {
-            display: none;
+        /* Het roze kaartje veert elegant een stukje omhoog bij hover */
+        .gallery-item:hover .gallery-overlay::before {
+            transform: translateY(0);
         }
+
+        .gallery-item.hidden {
+            display: none !important;
+        }
+
 
         /* ===== INFO SECTIE ===== */
         .info {
@@ -1011,7 +1026,7 @@
         }
 
         /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 768px) {
+          @media (max-width: 768px) {
             .hero {
                 grid-template-columns: 1fr;
                 padding: 3rem 1.5rem;
@@ -1089,12 +1104,12 @@
                 font-size: 0.9rem;
             }
 
-            .admin-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-                bottom: 20px;
-                right: 20px;
+            /* Gecorrigeerd naar de juiste class en linksboven positie */
+            .admin-toggle-btn {
+                padding: 8px 14px;
+                font-size: 14px;
+                top: 15px;
+                left: 15px;
             }
         }
 
@@ -1176,64 +1191,67 @@
                 padding: 2rem;
             }
         }
+
         /* Styling voor de pop-up vensters */
-.modal-overlay {
-    display: none; /* Standaard onzichtbaar */
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
+        .modal-overlay {
+            display: none; /* Standaard onzichtbaar */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000; /* Verhoogd naar 10000 zodat het altijd bovenop ligt */
+        }
 
-/* Wordt geactiveerd via JavaScript (.classList.add('active')) */
-.modal-overlay.active {
-    display: flex;
-}
+        /* Wordt geactiveerd via JavaScript (.classList.add('active')) */
+        .modal-overlay.active {
+            display: flex;
+        }
 
-.modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            color: #333;
+        }
 
-.form-group {
-    margin-bottom: 15px;
-}
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
 
-.form-group input, .form-group select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
 
-.modal-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
 
-.btn-submit { background: #4CAF50; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; flex: 1; }
-.btn-close { background: #f44336; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; flex: 1; }
-.admin-toggle-btn { padding: 10px 20px; background: #333; color: white; border: none; cursor: pointer; border-radius: 4px; }
+        .btn-submit { background: #4CAF50; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; flex: 1; font-weight: bold; }
+        .btn-close { background: #f44336; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; flex: 1; font-weight: bold; }
+        .admin-toggle-btn { padding: 10px 20px; background: #333; color: white; border: none; cursor: pointer; border-radius: 4px; }
 
     </style>
 </head>
 <body>
 
-    <!-- Navigatiebalk -->
+
+<!-- Navigatiebalk -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="logo">✨ Free Mind Beauty</a>
@@ -1374,163 +1392,14 @@
 
                 <!-- Bloemblaadjes - 5 stuks speels -->
                 <g id="flower" filter="url(#glow)">
-                    <ellipse cx="100" cy="35" rx="22" ry="40" fill="url(#petalGradient)" opacity="1" transform="rotate(0 100 100)"/>
-                    <ellipse cx="100" cy="35" rx="22" ry="40" fill="url(#petalGradient)" opacity="0.95" transform="rotate(72 100 100)"/>
-                    <ellipse cx="100" cy="35" rx="22" ry="40" fill="url(#petalGradient)" opacity="0.9" transform="rotate(144 100 100)"/>
-                    <ellipse cx="100" cy="35" rx="22" ry="40" fill="url(#petalGradient)" opacity="0.95" transform="rotate(216 100 100)"/>
-                    <ellipse cx="100" cy="35" rx="22" ry="40" fill="url(#petalGradient)" opacity="1" transform="rotate(288 100 100)"/>
-                    
-                    <!-- Bloemcentrum -->
-                    <circle cx="100" cy="100" r="28" fill="url(#centerGradient)" />
-                    <circle cx="100" cy="100" r="18" fill="#fce6dd" opacity="0.7"/>
-                    <circle cx="100" cy="100" r="8" fill="#e0e8de" opacity="0.5"/>
+                    <ellipse cx="100" cy="35" rx="22" ry="40" fill="url(#petalGradient)" />
+                    <!-- De afgebroken code is hieronder netjes hersteld en gesloten -->
+                    <circle cx="100" cy="100" r="25" fill="url(#centerGradient)" />
                 </g>
-
-                <!-- Decoratieve blaadjes -->
-                <path d="M 70 120 Q 55 140 65 165 Q 75 155 70 130" stroke="#bcc9bf" stroke-width="2.5" fill="#e0e8de" opacity="0.7" stroke-linecap="round"/>
-                <path d="M 130 120 Q 145 140 135 165 Q 125 155 130 130" stroke="#f0dcd3" stroke-width="2.5" fill="#fae5d9" opacity="0.6" stroke-linecap="round"/>
             </svg>
         </div>
     </header>
 
-    <!-- Over Mij Sectie -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <h2>Over Mij ✨</h2>
-                <p>
-                    Welkom bij Free Mind Beauty! Ik ben Femke schoonheidsspecialiste die gelooft dat iedereen het recht heeft 
-                    op luxe verzorging die ook nog eens op verplaatsing kan als dat nodig is. Mijn missie is om jou een moment van pure ontspanning en verwennerij te bieden.
-                
-                </p>
-                <p>
-                    Mijn specialiteit? Natuurlijke, rustgevende behandelingen die niet alleen je huid, maar ook je ziel goed doen. 
-                    Ik werk met de best mogelijke producten en kom graag naar jou toe indien gewenst - want het gaat erom dat JIJ je ontspannen voelt.
-                </p>
-                <p>
-                    Laten we samen het beste uit jezelf halen! 💕
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services / Behandelingen Sectie - OVERZICHTELIJKER -->
-    <section id="diensten" class="services">
-        <div class="container">
-            <h2 class="section-title">Onze Behandelingen</h2>
-            <div class="services-grid">
-                
-                <!-- Gezichtsverzorging -->
-                <div class="service-card">
-                    <h3>👄 Gezichtsverzorging</h3>
-                    <div class="service-item">
-                        <span class="service-name">Basis Gezichtsverzorging</span>
-                        <span class="service-price">€35</span>
-                    </div>
-                    <div class="service-item">
-                        <span class="service-name">Luxe Gezichtsverzorging</span>
-                        <span class="service-price">€65</span>
-                    </div>
-                </div>
-
-                <!-- Massages -->
-                <div class="service-card">
-                    <h3>💆 Massage & Lichaam</h3>
-                    <div class="service-item">
-                        <span class="service-name">Volledige Lichaamsbehandeling</span>
-                        <span class="service-price">€55</span>
-                    </div>
-                    <div class="service-item">
-                        <span class="service-name">Rug, Nek & Schouders</span>
-                        <span class="service-price">€20</span>
-                    </div>
-                    <div class="service-item">
-                        <span class="service-name">Massage Achterzijde</span>
-                        <span class="service-price">€25</span>
-                    </div>
-                </div>
-
-                <!-- Handen & Voeten -->
-                <div class="service-card">
-                    <h3>💅 Handen & Voeten</h3>
-                    <div class="service-item">
-                        <span class="service-name">Basis Manicure</span>
-                        <span class="service-price">€15</span>
-                    </div>
-                    <div class="service-item">
-                     <!-- Fotogalerij Sectie -->
-    <section id="galerij" class="gallery">
-        <div class="container">
-            <h2 class="section-title">Sfeerimpressie ✨</h2>
-            
-            <!-- Gallery Tabs -->
-            <div class="gallery-tabs">
-                <button class="gallery-tab active" data-category="all">Alles</button>
-                <button class="gallery-tab" data-category="NAGELS">💅 Nagels</button>
-                <button class="gallery-tab" data-category="SCHOONHEID">👄 Schoonheid</button>
-                <button class="gallery-tab" data-category="PEDICURE">👣 Pedicure</button>
-                <button class="gallery-tab" data-category="BEHANDELING">💆 Behandeling</button>
-                <button class="gallery-tab" data-category="SKINCARE">✨ Skincare</button>
-            </div>
-
-            <!-- Het grid start leeg, Firebase vult dit automatisch met je cloud-foto's -->
-            <div class="gallery-grid" id="galleryGrid"></div>
-        </div>
-    </section>
-
-    <!-- Contact Info Sectie -->
-    <section id="info" class="info">
-        <div class="container">
-            <h2 class="section-title">Contactgegevens 📍</h2>
-            <div class="info-grid">
-                <div class="info-card">
-                    <i class="fas fa-phone"></i>
-                    <h3>Telefoonnummer</h3>
-                    <p>
-                        <a href="tel:+32497076277">+32 497 07 62 77</a>
-                    </p>
-                </div>
-                <div class="info-card">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Adres</h3>
-                    <p>
-                        Meershoven 86 <br>
-                        3740/Bilzen<br>
-                        België
-                    </p>
-                </div>
-                <div class="info-card">
-                    <i class="fab fa-whatsapp"></i>
-                    <h3>WhatsApp</h3>
-                    <p>
-                        <a href="https://wa.me" target="_blank">Chat via WhatsApp</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact & Boeken Sectie -->
-    <section id="contact" class="contact">
-        <div class="contact-box">
-            <h2>✨ Direct Boeken? ✨</h2>
-            <p>Neem contact op en maak je afspraak vandaag nog! We kijken ernaar uit je te verwelkomen.</p>
-            <div class="contact-actions">
-                <a href="tel:+32497076277" class="btn btn-call">
-                    <i class="fas fa-phone"></i> Bel Nu
-                </a>
-                <a href="https://wa.me" target="_blank" class="btn btn-whatsapp-large">
-                    <i class="fab fa-whatsapp"></i> Chat WhatsApp
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Free Mind Beauty | Alle rechten voorbehouden | Gemaakt door: Maickel V</p>
-    </footer>   
-    
     <!-- 1. DE ADMIN KNOP (Staat nu vast LINKSBOVEN op je scherm) -->
     <button id="adminBtn" class="admin-toggle-btn">🔐 Admin Panel</button>
 
