@@ -1640,7 +1640,7 @@
             apiKey: "AIzaSyBQG87pGB_P-_AT01Ltl-S922WbUV0aGyU",
             authDomain: "free-mind-beauty.firebaseapp.com",
             projectId: "free-mind-beauty",
-            storageBucket: "free-mind-beauty.firebasestorage.app",
+            storageBucket: "gs://free-mind-beauty.firebasestorage.appspot.com",
             messagingSenderId: "10687471548",
             appId: "1:10687471548:web:8660669a7fba4a1cc595b9",
             measurementId: "G-YTXW8M0LHF"
@@ -1719,7 +1719,9 @@
                 alert('❌ Je moet ingelogd zijn om te kunnen uploaden.');
                 return;
             }
-
+console.log("Current user:", currentUser);
+console.log("UID:", currentUser?.uid);
+console.log("Storage bucket:", storage.app.options.storageBucket);
             try {
                 const storageRef = ref(storage, `gallery/${Date.now()}_${file.name}`);
                 const snapshot = await uploadBytes(storageRef, file);
@@ -1732,8 +1734,13 @@
                     timestamp: new Date()
                 };
 
-                await addDoc(collection(db, "photos"), photoItem);
-                addPhotoToGallery(photoItem);
+    try {
+    await addDoc(collection(db, "photos"), photoItem);
+    console.log("Firestore OK");
+} catch (e) {
+    console.error("Firestore fout:", e);
+    alert("Firestore fout: " + e.message);
+}
 
                 alert('✅ Foto succesvol geüpload!');
                 fileField.value = '';
